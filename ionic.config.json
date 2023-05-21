@@ -1,7 +1,7 @@
 {
-  "name": "manglist_ionic",
+  "name": "ionic-foodscore",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular-standalone"
+  "type": "angular"
 }

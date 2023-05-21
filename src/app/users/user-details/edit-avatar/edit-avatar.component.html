@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancelButton()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Edit password</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmButton()">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="inset">Image</ion-label>
+    <ion-button color="secondary" (click)="takePhoto()">
+      <ion-icon name="camera" slot="start"></ion-icon>
+      Camera
+    </ion-button>
+    <ion-button color="tertiary" (click)="pickFromGallery()">
+      <ion-icon name="images" slot="start"></ion-icon>
+      Gallery
+    </ion-button>
+  </ion-item>
+  <ion-img src="{{user.avatar}}"></ion-img>
+</ion-content>

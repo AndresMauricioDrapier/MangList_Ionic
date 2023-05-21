@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #registerForm="ngForm" (ngSubmit)="register()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input
+          name="name"
+          required
+          [(ngModel)]="user.name"
+          #nameModel="ngModel"
+        ></ion-input>
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+          color="success"
+          *ngIf="nameModel.dirty && nameModel.valid"
+        ></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          type="email"
+          name="email"
+          required
+          [(ngModel)]="user.email"
+          #emailModel="ngModel"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        ></ion-input>
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+          color="success"
+          *ngIf="emailModel.dirty && emailModel.valid"
+        ></ion-icon>
+      </ion-item>
+      <div
+        ngModelGroup="passGroup"
+        #passGroupModel="ngModelGroup"
+        appMatch="password,password2"
+      >
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input
+            type="password"
+            name="password"
+            minlength="4"
+            required
+            [(ngModel)]="user.password"
+            #passModel="ngModel"
+          ></ion-input>
+          <ion-icon
+            name="checkmark-circle"
+            slot="end"
+            color="success"
+            *ngIf="passModel.dirty && passModel.valid"
+          ></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Repeat Password</ion-label>
+          <ion-input
+            type="password"
+            name="password2"
+            required
+            [(ngModel)]="password2"
+            #passModel2="ngModel"
+          ></ion-input>
+          <ion-icon
+            name="checkmark-circle"
+            slot="end"
+            color="success"
+            *ngIf="passModel2.dirty && passGroupModel.valid"
+          ></ion-icon>
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label position="inset">Avatar</ion-label>
+        <ion-button color="secondary" (click)="takePhoto()">
+          <ion-icon name="camera" slot="start"></ion-icon>
+          Camera
+        </ion-button>
+        <ion-button color="tertiary" (click)="pickFromGallery()">
+          <ion-icon name="images" slot="start"></ion-icon>
+          Gallery
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-img [src]="user.avatar" *ngIf="user.avatar"></ion-img>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button
+            type="submit"
+            color="primary"
+            expand="block"
+            [disabled]="registerForm.invalid || !user.avatar"
+          >
+            <ion-icon name="document-text" slot="start"></ion-icon>
+            Register
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button
+            color="danger"
+            expand="block"
+            fill="outline"
+            [routerLink]="['/auth/login']"
+            [routerDirection]="'root'"
+          >
+            <ion-icon name="arrow-undo-circle" slot="start"></ion-icon>
+            Go to login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

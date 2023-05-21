@@ -1,23 +1,69 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EnvironmentInjector } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import {
+  IonicModule,
+  NavController,
+  Platform,
+  ToastController,
+} from '@ionic/angular';
+import { AuthService } from './auth/services/auth.service';
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, IonicModule, RouterLink, RouterLinkActive],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  standalone: true,
-  imports: [IonicModule, RouterLink, RouterLinkActive, CommonModule],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  // menuDisabled = true;
+
+  // public appPages = [
+  //   {
+  //     title: 'Profile',
+  //     url: '/user',
+  //     icon: 'person-circle',
+  //   },
+  //   {
+  //     title: 'Restaurants',
+  //     url: '/restaurants',
+  //     icon: 'restaurant',
+  //   },
+  //   {
+  //     title: 'Add restaurant',
+  //     url: '/restaurants/add',
+  //     icon: 'add-circle',
+  //   },
+  // ];
+
+  // constructor(
+  //   public environmentInjector: EnvironmentInjector,
+  //   private authService: AuthService,
+  //   private nav: NavController,
+  //   private platform: Platform,
+  //   private toast: ToastController
+  // ) {
+  //   this.initializeApp();
+  //   this.authService.loginChange$.subscribe(
+  //     (logged) => (this.menuDisabled = !logged)
+  //   );
+  // }
+  // initializeApp() {
+  //   if (this.platform.is('capacitor')) {
+  //     this.platform.ready().then(() => {
+  //       SplashScreen.hide();
+  //       StatusBar.setBackgroundColor({ color: '#3880ff' });
+  //       StatusBar.setStyle({ style: Style.Dark });
+  //       GoogleAuth.initialize();
+  //     });
+  //   }
+  // }
+
+  // async logout() {
+  //   await this.authService.logout();
+  //   this.nav.navigateRoot(['/auth/login']);
+  // }
 }

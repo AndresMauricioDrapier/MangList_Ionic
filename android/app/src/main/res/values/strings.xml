@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Restaurants ubication</string>
+    <string name="title_activity_main">Restaurants ubication</string>
+    <string name="package_name">io.ionic.andres</string>
+    <string name="custom_url_scheme">io.ionic.andres</string>
+</resources>

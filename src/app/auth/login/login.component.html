@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" name="email" required [(ngModel)]="user.email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" name="password" required [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" expand="block" [disabled]="loginForm.invalid">
+            <ion-icon name="log-in" slot="start"></ion-icon>
+            Login
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="tertiary" expand="block" [routerLink]="['/auth/register']" [routerDirection]="'root'">
+            <ion-icon name="document-text" slot="start"></ion-icon>
+            Register
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="loggedGoogle()" color="danger" expand="block">
+            <ion-icon name="logo-google"></ion-icon>
+            &nbsp;
+            Login with Google
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="loginFaceebok()" color="secondary" expand="block">
+            <ion-icon name="logo-facebook"></ion-icon>
+            &nbsp;
+            Login with Facebook
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </form>
+
+
+</ion-content>
