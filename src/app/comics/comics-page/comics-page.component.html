@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="principal">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="mainIndex">
+<ion-content>
 
   <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadProducts(refresher)">
     <ion-refresher-content>
@@ -29,7 +29,7 @@
   </ion-grid>
 
   <ion-list id="contenido">
-    {{comics |json}}
+    <!-- {{comics |json}} -->
     <ion-item *ngFor="let comic of comics">
       <ml-comic-card [comic]="comic.node"></ml-comic-card>
     </ion-item>
