@@ -1,25 +1,38 @@
-<!-- Contendor principal -->
-<main id="mainIndex">
-  <!-- Filtro -->
-  <div id="filtro">
-    <form [formGroup]="filterGenres">
-      <select id="genres" formControlName="genres">
-        <option selected>Todos</option>
-        <ng-container *ngFor="let g of genres">
-          <option [ngValue]="g">{{ g.name }}</option>
-        </ng-container>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Comics</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-      </select>
-    </form>
-  </div>
+<ion-content id="mainIndex">
 
-  <div id="contenido">
-    <div *ngFor="let comic of comics | comicsFilter:filterGenres.value.genres.value">
+  <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadProducts(refresher)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid>
+
+    <ion-list>
+      <ion-item>
+        <ion-select aria-label="Genero" placeholder="Filtrar por genero:" (ionChange)="handleChange($event)">
+          <ng-container *ngFor="let g of genres">
+            <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+  </ion-grid>
+
+  <ion-list id="contenido">
+    {{comics |json}}
+    <ion-item *ngFor="let comic of comics">
       <ml-comic-card [comic]="comic.node"></ml-comic-card>
-    </div>
-  </div>
+    </ion-item>
+  </ion-list>
 
-  <!-- /Contenido -->
-</main>
-<!-- /Contendor principal -->
-<!-- Pie de página -->
+</ion-content>

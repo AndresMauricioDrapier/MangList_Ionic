@@ -1,4 +1,4 @@
-package io.ionic.andres;
+package io.ionic.manglist;
 
 import com.getcapacitor.BridgeActivity;
 
