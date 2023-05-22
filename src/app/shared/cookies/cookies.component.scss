@@ -1,0 +1,109 @@
+$color_1: #838f93;
+$color_2: #fff;
+$color_3: #a309cd;
+$color_4: #a309cd;
+$font-family_1: "CeraPRO-Bold", sans-serif, arial;
+$font-family_2: "CeraPRO-Regular", sans-serif, arial;
+$background-color_1: #23282e;
+$background-color_2: #a309cd;
+$background-color_3: transparent;
+$background-color_4: #a309cd;
+$border-color_1: #838f93;
+
+.cookie-consent-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483645;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: $background-color_1;
+  text-align: justify;
+}
+
+.cookie-consent-banner__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cookie-consent-banner__copy {
+  margin-bottom: 16px;
+
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.cookie-consent-banner__header {
+  margin-bottom: 8px;
+  font-family: $font-family_1;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: $color_2;
+}
+
+.cookie-consent-banner__description {
+  font-family: $font-family_2;
+  font-weight: normal;
+  color: $color_1;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.cookie-consent-banner__actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.cookie-consent-banner__cta {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 164px;
+  padding: 11px 13px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #a309cd;
+  background-color: $background-color_2;
+  color: $color_2;
+  text-decoration: none;
+  text-align: center;
+  font-family: $font-family_2;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+
+  &:last-child {
+    margin-left: 16px;
+  }
+  &:hover {
+    background-color: $background-color_4;
+
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+}
+
+.cookie-consent-banner__cta--secondary {
+  padding: 9px 13px;
+  border: 2px solid #3a4649;
+  background-color: $background-color_3;
+  box-shadow: 0 0 10px #3a4649;
+
+  &:hover {
+    border-color: $color_3;
+    background-color: $background-color_3;
+    color: $color_3 !important;
+    box-shadow: 0 0 10px $color_3;
+  }
+}

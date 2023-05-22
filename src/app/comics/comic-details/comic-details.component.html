@@ -1,0 +1,67 @@
+<main class="mainDescripcion" *ngIf="comic">
+  <!-- Contenedor izquierda -->
+  <div class="descripcionIzquierda">
+    <!-- Imagen -->
+    <div class="descripcionImagen" style="background-image: url({{comic.main_picture.medium}});">
+      <div class="descripcionPuntuacion">{{comic.mean}}</div>
+    </div>
+    <!-- /Imagen -->
+  </div>
+  <!-- /Contenedor izquierda -->
+  <!-- Contenedor derecha -->
+  <div class="descripcionDerecha">
+    <div>
+      <!-- Nombre -->
+      <h1 class="descripcionNombre">{{comic.title}}</h1>
+      <!-- /Nombre -->
+      <!-- Descripcion -->
+      <p>
+        {{comic.synopsis}}
+      </p>
+      <!-- /Descripcion -->
+    </div>
+    <!-- Datos -->
+    <div>
+      <table class="descripcionTabla">
+        <tr>
+          <td class="tituloCategoria">Categoría:</td>
+          <td class="contenidoTabla" *ngFor="let generos of comic.genres">
+            {{generos.name}}
+          </td>
+        </tr>
+        <tr>
+          <td class="descripcionSeparacion">Capitulos:</td>
+          <td class="contenidoTabla descripcionSeparacion">{{comic.num_volumes}}</td>
+        </tr>
+        <tr>
+          <td class="descripcionSeparacion">Año de serialización:</td>
+          <td class="contenidoTabla descripcionSeparacion">{{comic.start_date}}</td>
+        </tr>
+      </table>
+    </div>
+    <!-- /Datos -->
+    <!-- Botones -->
+    <div *ngIf="user" class="descripcionBotones">
+      <a class="descripcionBotonCesta favButton" [ngStyle]="{'font-size': haveRoleToEditComic ? 'small' : 'medium'}"
+        (click)="addToFavorites()" *ngIf="!inFav">Añadir a favoritos</a>
+      <a class="descripcionBotonCesta favButton" [ngStyle]="{'font-size': haveRoleToEditComic ? 'small' : 'medium'}"
+        (click)="deleteFronFavorites()" *ngIf="inFav">Quitar de favoritos</a>
+      <a class="descripcionBotonCesta" [ngStyle]="{'font-size': haveRoleToEditComic ? 'small' : 'medium'}"
+        (click)="goToReadingPage()">Leer capitulos</a>
+      <a *ngIf="haveRoleToEditComic" [ngStyle]="{'font-size': haveRoleToEditComic ? 'small' : 'medium'}"
+        class="descripcionBotonCesta newComicButton" (click)="goToEditComic()">
+        Editar comic
+      </a>
+    </div>
+    <!-- /Botones -->
+  </div>
+  <!-- /Contenedor derecha -->
+</main>
+
+<!-- Comentarios -->
+<section class="commentsDetailsContainer">
+  <ml-comments *ngIf="comic" [comicId]="comicId" [comment]="comment"></ml-comments>
+  <ml-create-comment *ngIf="user && comicId" [user]="user" [comicId]="comicId"
+    (comentary)="addComment($event)"></ml-create-comment>
+</section>
+<!-- /Comentarios -->

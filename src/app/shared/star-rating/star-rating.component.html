@@ -1,0 +1,10 @@
+<div class="star-container" *ngIf="edit" (mouseleave)="auxRating = rating">
+  <span *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-star"
+    [ngClass]="{ 'fa-solid': star <= auxRating, 'fa-regular': star > auxRating }" (click)="setRating(star)"
+    (mouseenter)="auxRating = star"></span>
+</div>
+
+<div class="star-container" *ngIf="!edit">
+  <span *ngFor="let star of [1, 2, 3, 4, 5]" class="fa-star"
+    [ngClass]="{ 'fa-solid': star <= auxRating, 'fa-regular': star > auxRating }"></span>
+</div>

@@ -1,0 +1,52 @@
+#mainIndex {
+  margin-top: 1em;
+  margin-bottom: 3em;
+
+  aside {
+    color: white;
+    font-family: "Aboreto", cursive;
+    font-size: 0.7em;
+  }
+
+  #filtro {
+    margin-left: 3em;
+
+    form select {
+      background-color: #060d17;
+      color: white;
+      border: 0;
+      width: 8em;
+    }
+  }
+
+  #contenido {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  #mainIndex {
+    .manga {
+      width: 10em !important;
+      height: 14em !important;
+    }
+
+    .nuevo {
+      margin-left: 8em !important;
+    }
+
+    .precioNombre {
+      margin-top: 11em !important;
+
+      .precio {
+        margin-right: 1em !important;
+        margin-left: 0.8em !important;
+      }
+    }
+  }
+}

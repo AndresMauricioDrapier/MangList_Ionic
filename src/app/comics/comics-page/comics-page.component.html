@@ -1,0 +1,25 @@
+<!-- Contendor principal -->
+<main id="mainIndex">
+  <!-- Filtro -->
+  <div id="filtro">
+    <form [formGroup]="filterGenres">
+      <select id="genres" formControlName="genres">
+        <option selected>Todos</option>
+        <ng-container *ngFor="let g of genres">
+          <option [ngValue]="g">{{ g.name }}</option>
+        </ng-container>
+
+      </select>
+    </form>
+  </div>
+
+  <div id="contenido">
+    <div *ngFor="let comic of comics | comicsFilter:filterGenres.value.genres.value">
+      <ml-comic-card [comic]="comic.node"></ml-comic-card>
+    </div>
+  </div>
+
+  <!-- /Contenido -->
+</main>
+<!-- /Contendor principal -->
+<!-- Pie de página -->

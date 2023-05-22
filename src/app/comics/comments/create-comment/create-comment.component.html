@@ -1,0 +1,18 @@
+<div *ngIf="user">
+  <form class="mt-4" id="commentForm" novalidate [formGroup]="formComment" (ngSubmit)="addComment()">
+    <h4>Escribe sobre el manga:</h4>
+    <div class="form-group">
+      <textarea class="form-control commentText" name="comment" formControlName="comment" placeholder="..."
+        [ngClass]="validClasses(commentControl, 'is-valid', 'is-invalid')"></textarea>
+      <div class="invalid-feedback" *ngIf="commentControl.errors?.['required']">
+        El comentario es obligatorio.
+      </div>
+    </div>
+    <div id="stars">
+      <ml-star-rating [rating]="newComment.stars" (changed)="setRating($event)" [edit]="true"></ml-star-rating>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3 sendCommentButton" [disabled]="formComment.invalid">
+      Enviar
+    </button>
+  </form>
+</div>

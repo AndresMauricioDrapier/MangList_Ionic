@@ -1,0 +1,25 @@
+<ng-template ngIf="{{comic.id}}">
+  <a [routerLink]="['/comics',comic.id]" *ngIf="comic.main_picture?.medium">
+    <div class="manga" style="background-image: url({{comic.main_picture.medium}});">
+      <!-- Etiqueta nuevo -->
+      <div [ngStyle]="{'opacity': isNew() ? '1' : '0'}" class="nuevo">Nuevo</div>
+      <!-- /Etiqueta nuevo -->
+      <!-- Precio y nombre -->
+      <div [ngStyle]="{'padding-top':comic.title.length < 25 ? '9%' : '3%'}" class="nombre">{{returnNameComic()}}</div>
+      <!-- /Precio y nombre -->
+    </div>
+  </a>
+</ng-template>
+
+<ng-template ngIf="{{comic._id}}">
+  <a [routerLink]="['/comics',comic._id]" *ngIf="comic.main_picture?.medium">
+    <div class="manga" style="background-image: url({{comic.main_picture.medium}});">
+      <!-- Etiqueta nuevo -->
+      <div [ngStyle]="{'opacity': isNew() ? '1' : '0'}" class="nuevo">Nuevo</div>
+      <!-- /Etiqueta nuevo -->
+      <!-- Precio y nombre -->
+      <div [ngStyle]="{'padding-top':comic.title.length < 25 ? '9%' : '3%'}" class="nombre">{{returnNameComic()}}</div>
+      <!-- /Precio y nombre -->
+    </div>
+  </a>
+</ng-template>

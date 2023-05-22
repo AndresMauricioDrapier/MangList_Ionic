@@ -1,0 +1,144 @@
+<section class="h-100 gradient-form">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black" style="
+                border: 0;
+                box-shadow: 0px 0px 25px 8px rgba(35, 40, 46, 1);
+              ">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-2 mx-md-2">
+                <div class="text-center pulse">
+                  <img src="assets/logo_MangList.png" style="width: 185px; box-shadow: none" alt="logo" />
+                  <h4 class="mb-5 pb-1" style="
+                          color: #a309cd;
+                          font-size: 3em;
+                          font-weight: bold;
+                        ">
+                    MangList
+                  </h4>
+                </div>
+
+                <form action="#" class="mt-4" method="POST" role="form" (ngSubmit)="loggin()" [formGroup]="userForm">
+                  <div class="form-outline mb-4">
+                    <input type="email" id="form2Example11" class="form-control form-control-2"
+                      placeholder="Introduce el email" [ngClass]="validClasses(emailControl)" formControlName="email"
+                      required />
+                    <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
+                      El email es necesario.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="emailControl.errors?.['email']">
+                      El email no es correcto.
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example22" class="form-control form-control-2"
+                      placeholder="Introduce la contraseña" [ngClass]="validClasses(passwordControl)"
+                      formControlName="password" required />
+                    <div class="invalid-feedback" *ngIf="passwordControl.errors?.['required']">
+                      La contraseña es necesaria.
+                    </div>
+                  </div>
+
+                  <div class="text-center pt-1 mb-4 pb-1 pulse">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" style="
+                            background-color: #a309cd;
+                            font-weight: bold;
+                            border-radius: 30px;
+                            border: 0;
+                            width: 100%;
+                            -webkit-box-shadow: 0px 0px 15px 4px
+                              rgba(163, 9, 205, 1);
+                            -moz-box-shadow: 0px 0px 15px 4px
+                              rgba(163, 9, 205, 1);
+                            box-shadow: 0px 0px 15px 4px rgba(163, 9, 205, 1);
+                          " [disabled]="userForm.invalid">
+                      Iniciar sesión
+                    </button>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <a class="text-muted me-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                      data-bs-whatever="mangastore@recuperacion.com">¿Olvidaste la contraseña?</a>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Recuperar Contraseña
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                              aria-label="Close" style="color: white !important"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form method="POST" role="form" aria-label="none" (ngSubmit)="mailPasswordRecovery()"
+                              [formGroup]="passRecoveryForm">
+                              <div class="mb-3">
+                                <input type="email" class="form-control form-control-2" id="recipient-email"
+                                  formControlName="emailRecovery" placeholder="Email:"
+                                  [ngClass]="validClasses(emailRecoveryControl)" />
+                                <div class="invalid-feedback" *ngIf="emailRecoveryControl.errors?.['required']">
+                                  El email es necesario.
+                                </div>
+                                <div class="invalid-feedback" *ngIf="emailRecoveryControl.errors?.['email']">
+                                  El email no es correcto.
+                                </div>
+                              </div>
+                              <div class="mb-3">
+                                <textarea class="form-control form-control-2" id="message-text"
+                                  formControlName="textRecovery" placeholder="Escribe aquí tu explicación ..."
+                                  [ngClass]="validClasses(textRecoveryControl)"></textarea>
+                                <div class="invalid-feedback" *ngIf="textRecoveryControl.errors?.['required']">
+                                  El texto es necesario.
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="reset" class="btn btn-block btn-lg button buttonClose" data-bs-dismiss="modal">
+                                  Cerrar
+                                </button>
+                                <button type="submit" class="btn btn-block btn-lg button">
+                                  Enviar mensaje
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <a [routerLink]="['/auth/register']" [routerLinkActive]="['active']" class="btn btn-outline-danger"
+                      style="border-radius: 20px">
+                      Crear cuenta
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">
+                  Un objetivo sencillo: Simplificar la compra de mangas.
+                </h4>
+                <p class="small mb-0">
+                  Leer manga actualmente es una de las modas más comunes en
+                  los jóvenes y no tan jóvenes. Comprar manga puede ser muy
+                  tedioso, ya que vienen de Japón y no siempre hay stock en
+                  tiendas físicas. Nuestro objetivo es poder llegar a esas
+                  personas que se han quedado sin stock de su manga favorito
+                  o que simplemente quieren coleccionar una saga que no se
+                  distribuye en España. Como apasionado de este mundo sé lo
+                  que significa querer comprar una saga y no poder, por lo
+                  tanto, hemos abierto esta tienda con el objetivo de poder
+                  cumplir esos deseos y de promover el mundo del manga, el
+                  cual es apasionante.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

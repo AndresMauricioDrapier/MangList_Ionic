@@ -1,0 +1,204 @@
+.mainDescripcion {
+  display: flex;
+  color: white;
+  margin-top: 2em;
+  margin-left: 8em;
+  margin-right: 8em;
+
+  .descripcionIzquierda {
+    margin-right: 2em;
+
+    .descripcionImagen {
+      background-image: no-repeat;
+      background-image: fixed;
+      background-image: center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 0px 28px 10px #23282e;
+      -moz-box-shadow: 0px 0px 28px 10px #23282e;
+      box-shadow: 0px 0px 28px 10px #23282e;
+      width: 21em;
+      height: 31.5em;
+      margin-left: 2em;
+      display: flex;
+      flex-direction: column;
+
+      .descripcionPuntuacion {
+        background-color: #a309cd;
+        border-radius: 40px;
+        opacity: 0.8;
+        text-align: center;
+        width: 3em;
+        height: 3em;
+        font-size: medium;
+        box-shadow: 0 0 10px #a309cd;
+        padding: 0.7em;
+        font-weight: 700;
+        justify-content: flex-end;
+      }
+    }
+
+    .descripcionNombre {
+      text-align: center;
+      font-size: 3em;
+      font-weight: bolder;
+      margin-left: 0.7em;
+    }
+  }
+
+  .descripcionDerecha {
+    text-align: justify;
+
+    h2 {
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .descripcionTabla {
+      text-align: start;
+      font-size: small;
+      margin-top: 6em;
+      width: 25em;
+
+      .tituloCategoria {
+        // padding-bottom: 1.4em;
+        width: 20% !important;
+      }
+
+      .contenidoTabla {
+        padding-left: 1em;
+      }
+
+      .descripcionSeparacion {
+        padding-top: 1em;
+      }
+    }
+
+    .descripcionBotones {
+      font-weight: 700;
+      margin-top: 3em;
+      text-align: right;
+
+      .descripcionBotonCesta {
+        background-color: #a309cd;
+        border-radius: 40px;
+        opacity: 0.8;
+        text-align: center;
+        width: 1.4em;
+        height: 1.4em;
+        font-size: medium;
+        box-shadow: 0 0 10px #a309cd;
+        margin-left: 2%;
+        padding: 0.7em;
+        cursor: pointer;
+      }
+
+      .newComicButton{
+        background-color: #3200a8;
+        box-shadow: 0 0 10px #3200a8;
+        border: 1px solid #3200a8;
+      }
+    }
+  }
+}
+
+.commentsDetailsContainer{
+  padding-top: 2em !important;
+}
+
+@media screen and (max-width: 1400px) {
+  .mainDescripcion {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
+
+    .descripcionIzquierda {
+      .descripcionImagen {
+        text-align: center;
+        width: 19em;
+        height: 28em;
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+
+      h1 {
+        text-align: center !important;
+        font-size: 2em !important;
+        margin-bottom: 0.5em;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 873px) {
+  .mainDescripcion {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
+
+    .descripcionIzquierda {
+      .descripcionImagen {
+        text-align: center;
+        width: 19em;
+        height: 28em;
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+
+      h1 {
+        text-align: center !important;
+        font-size: 2em !important;
+        margin-bottom: 0.5em;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mainDescripcion {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .descripcionIzquierda {
+      text-align: center;
+      margin-left: 0.7em;
+
+      .descripcionImagen {
+        width: 17em;
+        height: 25em;
+        margin-bottom: 2em;
+      }
+
+      h1 {
+        text-align: center !important;
+        font-size: 2.6em !important;
+        margin-bottom: 0.5em;
+      }
+    }
+    .descripcionDerecha {
+      margin-bottom: 0.5em;
+
+      .descripcionBotones {
+        margin-left: 0;
+        text-align: center;
+
+        .favButton{
+          margin-left: 0px !important;
+        }
+      }
+    }
+  }
+}
