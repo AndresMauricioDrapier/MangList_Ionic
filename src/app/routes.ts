@@ -8,12 +8,12 @@ export const APP_ROUTES: Routes = [
         loadChildren: () =>
             import("./comics/comics.routes").then((p) => p.COMICS_ROUTES),
     },
-    // {
-    //     path: "auth",
-    //     loadChildren: () =>
-    //         import("./app/auth/auth.routes").then((p) => p.AUTH_ROUTES),
-    //     canActivate: [logoutActivateGuard],
-    // },
+    {
+        path: "auth",
+        loadChildren: () =>
+            import("./auth/auth.routes").then((p) => p.AUTH_ROUTES),
+        // canActivate: [logoutActivateGuard],
+    },
     // {
     //     path: "about",
     //     loadChildren: () =>

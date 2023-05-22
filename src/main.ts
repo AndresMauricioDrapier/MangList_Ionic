@@ -15,6 +15,7 @@ import { APP_ROUTES } from './app/routes';
 import { baseUrlInterceptor } from './app/interceptors/base-url.interceptor';
 import { tokenInterceptor } from './app/interceptors/token.interceptor';
 import { UserInterceptor } from './app/interceptors/user.interceptor';
+import "hammerjs";
 
 if (environment.production) {
   enableProdMode();
