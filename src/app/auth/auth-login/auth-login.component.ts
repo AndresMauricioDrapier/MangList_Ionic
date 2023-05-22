@@ -8,13 +8,12 @@ import {
     Validators,
 } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { GoogleLoginDirective } from "./google-login/google-login.directive";
 import { AuthService } from "../services/auth.service";
 import { AuthLogin } from "../interfaces/auth";
 import Swal from "sweetalert2";
 import { UsersService } from "src/app/users/services/users.service";
+import { IonicModule } from "@ionic/angular";
 
 @Component({
     selector: "ml-auth-login",
@@ -22,9 +21,9 @@ import { UsersService } from "src/app/users/services/users.service";
     imports: [
         CommonModule,
         RouterModule,
-        FontAwesomeModule,
         GoogleLoginDirective,
         ReactiveFormsModule,
+        IonicModule
     ],
     templateUrl: "./auth-login.component.html",
     styleUrls: ["./auth-login.component.scss"],
@@ -33,7 +32,6 @@ export class AuthLoginComponent implements OnInit {
     userForm!: FormGroup;
     emailControl!: FormControl<string>;
     passwordControl!: FormControl<string>;
-    googleIcon = faGoogle;
 
     userInfo: AuthLogin = {
         email: "",
@@ -100,7 +98,7 @@ export class AuthLoginComponent implements OnInit {
     }
 
 
-    loggin(): void {
+    login(): void {
         this.userInfo.email = this.emailControl.value.toLocaleLowerCase();
         this.userInfo.password = this.userForm.controls["password"].value;
         this.authService.login(this.userInfo).subscribe({
