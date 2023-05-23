@@ -1,6 +1,6 @@
 <ion-content>
   <ion-card>
-    <ion-card-header color="warning" class="ion-margin-top">
+    <ion-card-header color="principal" class="ion-margin-top">
       <ion-card-title>Comments:</ion-card-title>
     </ion-card-header>
 
@@ -23,7 +23,7 @@
     </ion-list>
   </ion-card>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!haveComment">
-    <ion-fab-button color="secondary" (click)="addComment()">
+    <ion-fab-button color="principal" (click)="addComment()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
