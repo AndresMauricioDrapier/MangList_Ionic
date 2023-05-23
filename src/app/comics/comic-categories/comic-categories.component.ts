@@ -69,18 +69,18 @@ export class ComicCategoriesComponent implements OnInit {
   }
 
   handleChangeGenre(e: any) {
-    this.genreFilter =  e.detail.value;
+    this.genreFilter =  e.detail.value.value;
   }
   handleChangeDate(e: any) {
-    this.startDateFilter =  e.detail.value;
+    this.startDateFilter =  e.detail.value.value;
 
   }
   handleChangeStatus(e: any) {
-    this.statusFilter =  e.detail.value;
+    this.statusFilter =  e.detail.value.value;
 
   }
   handleChangeOrder(e: any) {
-    this.orderFilter =  e.detail.value;
+    this.orderFilter =  e.detail.value.value;
   }
 
   ngOnInit(): void {
