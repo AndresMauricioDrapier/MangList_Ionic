@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { CommentsService } from '../services/comments.service';
 import { AlertController, IonicModule, IonRefresher } from '@ionic/angular';
-import { Auth } from 'src/app/auth/interfaces/auth';
 import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
