@@ -3,11 +3,12 @@ import { CommonModule } from "@angular/common";
 import { Comic } from "../interfaces/comics";
 import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
+import { IonicModule } from '@ionic/angular';
 
 @Component({
     selector: "ml-comic-card",
     standalone: true,
-    imports: [CommonModule, RouterModule, FormsModule],
+    imports: [CommonModule, RouterModule, FormsModule, IonicModule],
     templateUrl: "./comic-card.component.html",
     styleUrls: ["./comic-card.component.scss"],
 })
