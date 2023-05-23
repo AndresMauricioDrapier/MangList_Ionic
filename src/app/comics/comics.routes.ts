@@ -12,16 +12,16 @@ export const COMICS_ROUTES: Routes = [
             ),
         // canDeactivate: [leavePageGuard],
     },
-    // {
-    //     path: "categorias",
-    //     loadComponent: () =>
-    //         import("./comic-categories/comic-categories.component").then(
-    //             (m) => m.ComicCategoriesComponent
-    //         ),
-    //     // resolve: {
-    //     //     comic: comicResolve,
-    //     // },
-    // },
+    {
+        path: "categorias",
+        loadComponent: () =>
+            import("./comic-categories/comic-categories.component").then(
+                (m) => m.ComicCategoriesComponent
+            ),
+        // resolve: {
+        //     comic: comicResolve,
+        // },
+    },
     // {
     //     path: "comics/add",
     //     loadComponent: () =>

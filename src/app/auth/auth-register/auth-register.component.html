@@ -1,4 +1,4 @@
-<!-- Contendor principal -->
+<!--
 <form class="h-100 bg-dark" method="POST" role="form" (ngSubmit)="addUser()" [formGroup]="userForm"
   enctype="multipart/form-data">
   <div class="container py-5 h-100">
@@ -78,18 +78,19 @@
 
                 <div class="mb-3">
                   <label for="image">Avatar: </label>
-                  <input accept="image/png,image/jpeg" type="file" class="form-control" id="avatar" name="avatar" formControlName="avatar" required
-                    data-bs-toggle="modal" data-bs-target="#exampleModal" (change)="fileChangeEvent($event)"
-                    formControlName="avatar" />
+                  <input accept="image/png,image/jpeg" type="file" class="form-control" id="avatar" name="avatar"
+                    formControlName="avatar" required data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    (change)="fileChangeEvent($event)" formControlName="avatar" />
                   <div class="invalid-feedback" *ngIf="imageControl.errors?.['required']">
                     El avatar es necesario.
                   </div>
                 </div>
 
-                <img [src]="newUser.avatar" class="mb-3 mb-3 previewAvatar" *ngIf="!(newUser.avatar ==='')?'d-none':''" alt="avatar">
+                <img [src]="newUser.avatar" class="mb-3 mb-3 previewAvatar" *ngIf="!(newUser.avatar ==='')?'d-none':''"
+                  alt="avatar">
 
                 <p class="text-danger" id="errorInfo">
-                  <!-- La imagen es obligatoria. -->
+                  La imagen es obligatoria.
                 </p>
 
                 <div class="d-flex justify-content-end pt-3 pulse">
@@ -129,43 +130,89 @@
       </div>
     </div>
   </div>
-</form>
+</form> -->
 <!-- /Contendor principal -->
 
 
-<!-- POPUP PARA EL AVATAR CROPPER -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content rounded">
 
-      <div class="modal-body">
 
-        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
-          [roundCropper]=true format="png" (imageCropped)="imageCropped($event)"></image-cropper>
 
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #registerForm="ngForm" (ngSubmit)="addUser()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input name="name" required [(ngModel)]="newUser.name" #nameModel="ngModel"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success"
+          *ngIf="nameModel.dirty && nameModel.valid"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" name="email" required [(ngModel)]="newUser.email" #emailModel="ngModel"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success"
+          *ngIf="emailModel.dirty && emailModel.valid"></ion-icon>
+      </ion-item>
+      <div ngModelGroup="passGroup" #passGroupModel="ngModelGroup" appMatch="password,password2">
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" name="password" minlength="4" required [(ngModel)]="newUser.password"
+            #passModel="ngModel"></ion-input>
+          <ion-icon name="checkmark-circle" slot="end" color="success"
+            *ngIf="passModel.dirty && passModel.valid"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Repeat Password</ion-label>
+          <ion-input type="password" name="password2" required [(ngModel)]="userInfo.password"
+            #passModel2="ngModel"></ion-input>
+          <ion-icon name="checkmark-circle" slot="end" color="success"
+            *ngIf="passModel2.dirty && passGroupModel.valid"></ion-icon>
+        </ion-item>
       </div>
-
-      <div class="modal-footer">
-        <button type=" button" class="btn btn-block btn-lg" style="
-                  color: white;
-                  background-color: #060d17;
-                  border-radius: 30px;
-                  border: 0;
-                  width: 48%;
-                " data-bs-dismiss="modal" (click)="closeModal()">
-          Cerrar
-        </button>
-        <button type="button" class="btn btn-block btn-lg" style="
-                  color: white;
-                  background-color: #a309cd;
-                  border-radius: 30px;
-                  border: 0;
-                  width: 48%;
-                " data-bs-dismiss="modal" (click)="saveImage()">
-          Guardar imagen
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+      <ion-item>
+        <ion-label position="inset">Avatar</ion-label>
+        <ion-button color="secondary" (click)="takePhoto()">
+          <ion-icon name="camera" slot="start"></ion-icon>
+          Camera
+        </ion-button>
+        <ion-button color="tertiary" (click)="pickFromGallery()">
+          <ion-icon name="images" slot="start"></ion-icon>
+          Gallery
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-img [src]="newUser.avatar" *ngIf="newUser.avatar"></ion-img>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button type="reset" (click)="resetForm()">
+            Resetear
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" expand="block" [disabled]="registerForm.invalid || !newUser.avatar">
+            <ion-icon name="document-text" slot="start"></ion-icon>
+            Register
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="danger" expand="block" fill="outline" [routerLink]="['/auth/login']"
+            [routerDirection]="'root'">
+            <ion-icon name="arrow-undo-circle" slot="start"></ion-icon>
+            Go to login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

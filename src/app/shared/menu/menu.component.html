@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a [routerLink]="['/']" [routerLinkActive]="['active']"><img src="assets/logo_MangList.png" alt="MangList"
+        class="img" style="width: 60px" data-mdb-toggle="animation" data-mdb-animation-reset="true"
+        data-mdb-animation="pulse" data-mdb-animation-start="onHover"></a>
+    <a class="navbar-brand" [routerLink]="['/']" [routerLinkActive]="['active']">MangList</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+      aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse pt-2" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll menuList" style="--bs-scroll-height: 200px">
+        <li class="nav-item">
+          <a class="nav-link active m-1" aria-current="page" [routerLink]="['/']"
+            [routerLinkActive]="['active']">Inicio</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active m-1" href="#" id="navbarScrollingDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Categorias
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style="background-color: #060d17">
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Fantasy')">Fantasia</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Horror')">Terror</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Mystery')">Misterio</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Action')">Acción</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Supernatural')">Sobrenatural</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Martial Arts')">Artes Marciales</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('School')">Colegios y Universidad</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Seinen')">Sheinen</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Adventure')">Aventura</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="busquedaFiltro('Comedy')">Comedia</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active m-1" [routerLink]="['/contact']">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active m-1" [routerLink]="['/about']">Sobre nosotros</a>
+        </li>
+      </ul>
+      <form class="d-flex" style="width: 35%" (submit)="busqueda()">
+        <input class="form-control me-3 searchInput" type="search" placeholder="Busqueda de Manga o Manhwa"
+          aria-label="Search" style="background-color: #23282e !important; color: white" [(ngModel)]="filterSearch"
+          [ngModelOptions]="{standalone:true}">
+      </form>
+      <div class="menuIcons">
+        <a [routerLink]="['/auth/login']" *ngIf="!loggedIn" class="iconoUsuario">
+          <i class="fa-solid fa-user" style="color: #ffffff; font-size: 1.3em;"></i>
+        </a>
+        <a [routerLink]="['/users/me']" *ngIf="loggedIn" class="iconoUsuario" style="margin-right: 0;">
+          <i class="fa-solid fa-user" style="color: #ffffff; font-size: 1.3em;"></i>
+        </a>
+        <a class="nav-link iconoUsuario" *ngIf="loggedIn" [routerLinkActive]="['active']" id="logout" (click)="logout()">
+          <i class="fa-solid fa-right-from-bracket" style="color: #ffffff; font-size: 1.3em;"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
