@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="principal">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Contacto:</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img src="assets/logo_MangList.png"
+    alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+  <ion-grid>
+    <form method="POST" role="form" [formGroup]="contactForm" (ngSubmit)="sendMail()">
+      <ion-input color="principal" label="Nombre" label-placement="floating" fill="outline"
+        placeholder="Nombre Apellido"></ion-input>
+      <ion-input color="principal" label="Email" label-placement="floating" fill="outline"
+        placeholder="ejemplo@gmail.com"></ion-input>
+      <ion-textarea color="principal" label="Mensaje" labelPlacement="floating" fill="outline"
+        placeholder="Escribe aqui tu mensaje ..."></ion-textarea>
+      <ion-button color="principal">Enviar</ion-button>
+    </form>
+  </ion-grid>
+</ion-content>

@@ -21,13 +21,13 @@ export const APP_ROUTES: Routes = [
     //             (p) => p.ABOUT_ROUTES
     //         ),
     // },
-    // {
-    //     path: "contact",
-    //     loadChildren: () =>
-    //         import("./app/contact/contact.routes").then(
-    //             (p) => p.CONTACT_ROUTES
-    //         ),
-    // },
+    {
+        path: "contact",
+        loadChildren: () =>
+            import("../app/contact/contact.routes").then(
+                (p) => p.CONTACT_ROUTES
+            ),
+    },
     // {
     //     path: "users",
     //     loadChildren: () =>
