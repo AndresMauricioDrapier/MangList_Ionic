@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
-  FormGroup,
   FormsModule,
   NonNullableFormBuilder,
-  ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { Mail } from '../shared/mail/interfaces/mail';
 import { MailService } from '../shared/mail/services/mail.service';
@@ -15,20 +12,19 @@ import { AlertController, IonicModule } from '@ionic/angular';
 @Component({
   selector: 'ml-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
+  imports: [CommonModule, FormsModule, IonicModule],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent implements OnInit {
-  contactForm!: FormGroup;
-  nameControl!: FormControl<string>;
-  emailControl!: FormControl<string>;
-  messageControl!: FormControl<string>;
+  name = '';
+  email = '';
+  message = '';
 
   newMail: Mail = {
-    from: '',
+    from: 'info.manglist@gmail.com',
     subject: '',
-    to: '',
+    to: 'info.manglist@gmail.com',
     message: '',
   };
 
@@ -38,35 +34,16 @@ export class ContactComponent implements OnInit {
     private alertController: AlertController
   ) {}
 
-  ngOnInit(): void {
-    this.nameControl = this.fb.control('', [
-      Validators.required,
-      Validators.pattern('[a-zA-Z ]+'),
-    ]);
-    this.emailControl = this.fb.control('', [
-      Validators.required,
-      Validators.email,
-    ]);
-    this.messageControl = this.fb.control('', [Validators.required]);
-    this.contactForm = this.fb.group({
-      name: this.nameControl,
-      email: this.emailControl,
-      message: this.messageControl,
-    });
-  }
+  ngOnInit(): void {}
 
   sendMail(): void {
-    this.newMail.from = 'info.manglist@gmail.com';
-    this.newMail.subject = 'MangList: ' + this.nameControl.value;
-    this.newMail.to = 'info.manglist@gmail.com';
-    this.newMail.message =
-      'Contacto: ' + this.emailControl.value + '\n' + this.messageControl.value;
+    this.newMail.subject = 'MangList: ' + this.name;
+    this.newMail.message = 'Contacto: ' + this.email + '\n' + this.message;
 
     this.mailServices.send(this.newMail).subscribe({
       next: async () => {
         const alert = await this.alertController.create({
-          header: 'Success',
-          subHeader: '¡Mensaje enviado!',
+          header: '¡Mensaje enviado!',
           message: 'El mensaje ha sido enviado correctamente.',
           buttons: ['Aceptar'],
         });
@@ -75,8 +52,7 @@ export class ContactComponent implements OnInit {
       },
       error: async () => {
         const alert = await this.alertController.create({
-          header: 'Error',
-          subHeader: '¡Error al enviar el mensaje!',
+          header: '¡Error al enviar el mensaje!',
           message: 'El mensaje no podido enviarse.',
           buttons: ['Aceptar'],
         });

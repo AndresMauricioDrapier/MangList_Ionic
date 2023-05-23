@@ -15,7 +15,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Inicio', url: '/', icon: 'home' },
     { title: 'Categorias', url: '/folder/outbox', icon: 'apps' },
-    { title: 'Contacto', url: '/folder/favorites', icon: 'mail' },
+    { title: 'Contacto', url: '/contact', icon: 'mail' },
     { title: 'Sobre nosotros', url: '/folder/archived', icon: 'business' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
