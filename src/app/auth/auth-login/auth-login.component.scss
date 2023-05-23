@@ -1,138 +1,152 @@
-.modal-dialog {
-  border: 0;
+// .modal-dialog {
+//   border: 0;
+// }
+
+// .modal-body {
+//   color: #060d17;
+//   background-color: #23282e;
+//   border: 0;
+//   padding-bottom: 0;
+// }
+
+// .modal-header {
+//   background-color: #23282e;
+//   color: white;
+// }
+
+// .modal-footer {
+//   background-color: #23282e;
+//   border: 0;
+//   padding-top: 0;
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   align-items: center;
+//   align-content: center;
+// }
+
+// #exampleModalLabel {
+//   font-size: 2em;
+// }
+
+// #recipient-email {
+//   box-shadow: 0 0 10px #060d17;
+// }
+
+// #message-text {
+//   height: 10em;
+//   box-shadow: 0 0 10px #060d17;
+// }
+
+// .navbar-brand {
+//   color: #a309cd !important;
+//   font-weight: bold;
+//   font-size: 2.2em;
+// }
+
+// .bg-dark {
+//   background-color: #060d17 !important;
+// }
+
+// .dropdown-item {
+//   color: white;
+// }
+
+// .dropdown-item:hover {
+//   color: #060d17;
+// }
+
+// .form-control {
+//   background-color: #23282e;
+//   border-radius: 20px;
+//   border: 0;
+//   height: 2em;
+//   width: 100% !important;
+//   color: white;
+
+//   &:focus {
+//     color: white;
+//   }
+// }
+
+// .form-control-2 {
+//   background-color: #060d17 !important;
+// }
+
+// .card {
+//   background-color: #23282e;
+//   border: 1px solid white;
+
+//   -webkit-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+//   -moz-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+//   box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+// }
+
+// .card img {
+//   -webkit-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+//   -moz-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+//   box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+// }
+
+// .colorWhite {
+//   color: white !important;
+// }
+
+// .imgFormasPago {
+//   width: 100%;
+// }
+
+// .form-label {
+//   font-size: 0.9em;
+// }
+
+// .pulse :hover {
+//   -webkit-animation-name: pulse;
+//   animation-name: pulse;
+//   -webkit-animation-duration: 1s;
+//   animation-duration: 1s;
+//   -webkit-animation-fill-mode: both;
+//   animation-fill-mode: both;
+// }
+
+// .button {
+//   padding: 6px;
+//   border-radius: 20px;
+//   color: white;
+//   font-weight: bold;
+//   background-color: #a309cd;
+//   border: 0;
+//   box-shadow: 0 0 10px #a309cd;
+//   margin-top: 0.5em;
+//   width: 10em;
+//   text-align: center;
+
+//   &:hover {
+//     -webkit-animation-name: pulse;
+//     animation-name: pulse;
+//     -webkit-animation-duration: 1s;
+//     animation-duration: 1s;
+//     -webkit-animation-fill-mode: both;
+//     animation-fill-mode: both;
+//   }
+// }
+
+// .buttonClose {
+//   background-color: #060d17;
+//   box-shadow: 0 0 10px #060d17;
+// }
+
+ion-modal {
+  --height: 50%;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-.modal-body {
-  color: #060d17;
-  background-color: #23282e;
-  border: 0;
-  padding-bottom: 0;
+ion-modal::part(backdrop) {
+  background: rgba(209, 213, 219);
+  opacity: 1;
 }
 
-.modal-header {
-  background-color: #23282e;
-  color: white;
-}
-
-.modal-footer {
-  background-color: #23282e;
-  border: 0;
-  padding-top: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-}
-
-#exampleModalLabel{
-  font-size: 2em;
-}
-
-#recipient-email {
-  box-shadow: 0 0 10px #060d17;
-}
-
-#message-text {
-  height: 10em;
-  box-shadow: 0 0 10px #060d17;
-}
-
-.navbar-brand {
-  color: #a309cd !important;
-  font-weight: bold;
-  font-size: 2.2em;
-}
-
-.bg-dark {
-  background-color: #060d17 !important;
-}
-
-.dropdown-item {
-  color: white;
-}
-
-.dropdown-item:hover {
-  color: #060d17;
-}
-
-.form-control {
-  background-color: #23282e;
-  border-radius: 20px;
-  border: 0;
-  height: 2em;
-  width: 100% !important;
-  color: white;
-
-  &:focus {
-    color: white;
-  }
-}
-
-.form-control-2 {
-  background-color: #060d17 !important;
-}
-
-.card {
-  background-color: #23282e;
-  border: 1px solid white;
-
-  -webkit-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
-  -moz-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
-  box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
-}
-
-.card img {
-  -webkit-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
-  -moz-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
-  box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
-}
-
-.colorWhite {
-  color: white !important;
-}
-
-.imgFormasPago {
-  width: 100%;
-}
-
-.form-label {
-  font-size: 0.9em;
-}
-
-.pulse :hover {
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.button {
-  padding: 6px;
-  border-radius: 20px;
-  color: white;
-  font-weight: bold;
-  background-color: #a309cd;
-  border: 0;
-  box-shadow: 0 0 10px #a309cd;
-  margin-top: 0.5em;
-  width: 10em;
-  text-align: center;
-
-  &:hover {
-    -webkit-animation-name: pulse;
-    animation-name: pulse;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
-}
-
-.buttonClose {
-  background-color: #060d17;
-  box-shadow: 0 0 10px #060d17;
+ion-modal ion-toolbar {
 }
