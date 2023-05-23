@@ -4,13 +4,12 @@ import {
   FormControl,
   FormGroup,
   FormsModule,
-  NonNullableFormBuilder,
-  Validators,
 } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AuthLogin } from '../interfaces/auth';
 import { AlertController, IonicModule, NavController, ToastController } from '@ionic/angular';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'ml-auth-login',
@@ -31,7 +30,7 @@ export class AuthLoginComponent implements OnInit {
 
   constructor(
     private readonly authService: AuthService,
-    // private readonly userService: UsersService,
+    private readonly userService: UsersService,
     private alertCtrl: AlertController,
     private toast: ToastController,
     private nav: NavController
@@ -65,22 +64,24 @@ export class AuthLoginComponent implements OnInit {
   }
 
   mailPasswordRecovery(): void {
-    // this.userService.passwordRecovery(this.emailRecoveryControl.value).subscribe({
-    //   next: () => {
-    //     Swal.fire({
-    //       icon: "success",
-    //       title: "Correo enviado",
-    //       text: "Se ha enviado un correo para recuperar la contraseña",
-    //     });
-    //   },
-    //   error: (error) => {
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Oops...",
-    //       text: error.error.message,
-    //     });
-    //   },
-    // });
+    this.userService.passwordRecovery(this.emailRecoveryControl.value).subscribe({
+      next: async () => {
+        const alert = await this.alertCtrl.create({
+          header: 'Correo enviado',
+          message: "Se ha enviado un correo para recuperar la contraseña",
+          buttons: ['Ok'],
+        });
+        await alert.present();
+      },
+      error: async (error) => {
+        const alert = await this.alertCtrl.create({
+          header: 'Oops...',
+          message: error.error.message,
+          buttons: ['Ok'],
+        });
+        await alert.present();
+      },
+    });
   }
 
   goRegister(): void {
