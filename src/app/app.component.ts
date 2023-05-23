@@ -14,7 +14,7 @@ export class AppComponent {
 
   public appPages = [
     { title: 'Inicio', url: '/', icon: 'home' },
-    { title: 'Categorias', url: '/folder/outbox', icon: 'apps' },
+    { title: 'Categorias', url: '/categorias', icon: 'apps' },
     { title: 'Contacto', url: '/contact', icon: 'mail' },
     { title: 'Sobre nosotros', url: '/folder/archived', icon: 'business' },
   ];
