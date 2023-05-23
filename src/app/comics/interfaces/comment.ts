@@ -1,8 +1,8 @@
-// import { Auth } from "src/app/auth/interfaces/auth";
+import { Auth } from "src/app/auth/interfaces/auth";
 
 export interface Commentary {
     _id?: number;
-    user: "";
+    user: Auth;
     comicId: string;
     text: string;
     stars: number;

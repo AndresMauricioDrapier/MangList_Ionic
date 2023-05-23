@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header color="warning" class="ion-margin-top">
+      <ion-card-title>Comments:</ion-card-title>
+    </ion-card-header>
+
+    <ion-refresher #refresher slot="fixed" (ionRefresh)="loadComments(refresher)">
+      <ion-refresher-content> </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list *ngIf="comments">
+      <ion-item *ngFor="let com of comments">
+        <ion-avatar slot="start">
+          <ion-img [src]="com.user.avatar"></ion-img>
+        </ion-avatar>
+        <ion-label text-wrap>
+          <p>{{ com.user.name }}</p>
+          <h4>{{ com.text }}</h4>
+          <ml-star-rating [rating]="com.stars!" [edit]="false">
+          </ml-star-rating>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!haveComment">
+    <ion-fab-button color="secondary" (click)="addComment()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
