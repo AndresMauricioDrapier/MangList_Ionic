@@ -49,3 +49,16 @@
   --ion-color-shade: var(--ion-color-principal-shade);
   --ion-color-tint: var(--ion-color-principal-tint);
 }
+
+.ion-color-background {
+  --ion-color-base: var(--ion-color-background);
+  --ion-color-base-rgb: var(--ion-color-background-rgb);
+  --ion-color-contrast: var(--ion-color-background-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-background-contrast-rgb);
+  --ion-color-shade: var(--ion-color-background-shade);
+  --ion-color-tint: var(--ion-color-background-tint);
+}
+
+ion-title{
+  font-weight: bold;
+}
