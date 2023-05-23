@@ -16,7 +16,14 @@
         </ion-list>
 
         <ion-list>
-          <ion-menu-toggle auto-hide="false">
+          <ion-menu-toggle *ngIf="!loggedIn" auto-hide="false">
+            <ion-item (click)="logout()" lines="none" detail="false">
+              <ion-icon slot="start" name="exit"></ion-icon>
+              <ion-label>Login</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle *ngIf="loggedIn" auto-hide="false">
             <ion-item (click)="logout()" lines="none" detail="false">
               <ion-icon slot="start" name="exit"></ion-icon>
               <ion-label>Logout</ion-label>

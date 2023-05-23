@@ -1,7 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, EnvironmentInjector } from '@angular/core';
+import { Component, EnvironmentInjector, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonicModule, NavController, Platform, ToastController } from '@ionic/angular';
+import {
+  IonicModule,
+  NavController,
+  Platform,
+  ToastController,
+} from '@ionic/angular';
+import { AuthService } from './auth/services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -9,8 +15,11 @@ import { IonicModule, NavController, Platform, ToastController } from '@ionic/an
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   menuDisabled = true;
+
+  loggedIn!: boolean;
+  userId: string = localStorage.getItem('user-id') || '';
 
   public appPages = [
     { title: 'Inicio', url: '/', icon: 'home' },
@@ -22,16 +31,17 @@ export class AppComponent {
 
   constructor(
     public environmentInjector: EnvironmentInjector,
-    // private authService: AuthService,
-    private nav: NavController,
-    private platform: Platform,
-    private toast: ToastController
-  ) {
+    private authService: AuthService,
+    private nav: NavController
+  ) {}
 
+  ngOnInit(): void {
+    this.authService.isLogged();
+    this.authService.loginChange$.subscribe((t) => (this.loggedIn = t));
   }
 
   async logout() {
-    // await this.authService.logout();
-    // this.nav.navigateRoot(['/auth/login']);
+    await this.authService.logout();
+    this.nav.navigateRoot(['/auth/login']);
   }
 }
