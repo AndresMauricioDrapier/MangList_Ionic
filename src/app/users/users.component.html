@@ -1,68 +1,24 @@
-<div class="overflow-hidden" *ngIf="user">
+<!-- <div class="overflow-hidden">
   <div class="px-4 pt-0 pb-4 cover" id="cabeceraUsuario">
     <div class="media align-items-end profile-head">
-      <div class="profile mr-3 contenedorImagen"><img src="{{user.avatar}}" alt="Nombre usuario"
-          width="130" class="rounded mb-2 imagen">
-      </div>
+
       <div class="mb-5 text-white">
-        <h2 class="mt-0 mb-0 nombreUsuario">{{user.name}}</h2>
-        <small class="role">(Rol: {{user.role}})</small>
+        <small class="role"></small>
         <div *ngIf="isMe" class="buttonsContainer">
           <button type="button" *ngIf="haveRoleToAddComic" class="boton newComicButton" (click)="goToAddComic()">
             Añadir comic nuevo
           </button>
-          <!-- Editar perfil modal -->
+
           <button type="button" class="boton" data-bs-backdrop="false" data-bs-toggle="modal"
             data-bs-target="#editProfile">
             Editar perfil
           </button>
 
-          <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true"
-            data-bs-backdrop="false">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="editProfileLabel">Editar perfil:</h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form class="h-100" method="PUT" role="form" (ngSubmit)="saveUser()" [formGroup]="userForm"
-                    aria-label="">
-                    <div class="form-outline mb-4">
-                      <div class="form-outline">
-                        <input type="text" class="form-control form-control-m" placeholder="Usuario"
-                          [ngClass]="validClasses(nameControl)" formControlName="name" required />
-                        <div class="invalid-feedback" *ngIf="nameControl.errors?.['required']">
-                          El usuario es necesario.
-                        </div>
-                      </div>
-                    </div>
 
 
-                    <div class="form-outline mb-4">
-                      <input type="text" class="form-control form-control-m" placeholder="email@gmail.com"
-                        [ngClass]="validClasses(emailControl)" formControlName="email" required />
-                      <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
-                        El email es necesario
-                      </div>
-                      <div class="invalid-feedback" *ngIf="emailControl.errors?.['email']">
-                        El email tiene que tener el siguiente formato: usuario@mail.com
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="boton" data-bs-dismiss="modal">Cerrar</button>
-                      <button type="submit" class="boton">Guardar cambios</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Fin modal -->
 
 
-          <!-- Editar avatar modal -->
+
           <button type="button" class="boton" data-bs-backdrop="false" data-bs-toggle="modal"
             data-bs-target="#editAvatar">
             Editar avatar
@@ -102,9 +58,7 @@
               </div>
             </div>
           </div>
-          <!-- Fin modal -->
 
-          <!-- Editar conytraseña modal -->
           <button type="button" class="boton editPassButton" data-bs-backdrop="false" data-bs-toggle="modal"
             data-bs-target="#editPass">
             Editar contraseña
@@ -155,28 +109,16 @@
               </div>
             </div>
           </div>
-          <!-- Fin modal -->
+
         </div>
       </div>
     </div>
-  </div>
-  <!-- Comics favoritos -->
-  <div class="py-4 px-4" id="comicsFavoritos">
-    <div class="d-flex align-items-center justify-content-between mb-3">
-      <h3 class="mb-0">Comics favoritos:</h3>
-    </div>
-    <div class="contenido">
-      <div *ngFor="let comic of comics">
-        <ml-comic-card [comic]="comic"></ml-comic-card>
-      </div>
-    </div>
-  </div>
-  <!-- /Comics favoritos -->
-</div>
+  </div> -->
+<!-- </div> -->
 
 <!-- POPUP PARA EL AVATAR CROPPER -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content rounded">
 
@@ -209,4 +151,119 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<ion-header>
+  <ion-toolbar color="principal">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!user">Usuario:</ion-title>
+    <ion-title *ngIf="user">{{user.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="user">
+    <ion-item class="contenedorImagen"><ion-img src="{{user.avatar}}" alt="{{user.name}}" width="130"
+        class="rounded mb-2 imagen"></ion-img>
+    </ion-item>
+    <ion-card-header>
+      <ion-card-subtitle>(Rol: {{user.role}})</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <h3>Comics favoritos:</h3>
+    </ion-item>
+    <ion-item *ngFor="let comic of comics">
+      <ml-comic-card [comic]="comic"></ml-comic-card>
+    </ion-item>
+  </ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" color="principal">
+    <ion-fab-button color="principal">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="principal" (click)="isModalProfileOpen = true">
+        <ion-icon name="person"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="principal" (click)="isModalAvatarOpen = true">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="principal" (click)="isModalPasswordOpen = true">
+        <ion-icon name="keypad"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-modal [isOpen]="isModalProfileOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Editar perfil:</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalProfileOpen = false">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form method="PUT" role="form" (ngSubmit)="saveUser()" [formGroup]="userForm" aria-label="">
+          <ion-input type="text" placeholder="Usuario" [ngClass]="validClasses(nameControl)" formControlName="name"
+            required></ion-input>
+          <ion-input type="email" placeholder="ejemplo@gmail.com" [ngClass]="validClasses(emailControl)"
+            formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></ion-input>
+
+          <ion-button type="submit" color="principal">Guardar cambios</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="isModalAvatarOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Editar avatar:</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalAvatarOpen = false">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
+          reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
+          dicta.
+        </p>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="isModalPasswordOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Editar contraseña:</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalPasswordOpen = false">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
+          reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
+          dicta.
+        </p>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

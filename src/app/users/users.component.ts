@@ -12,10 +12,11 @@ import {
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import Swal from "sweetalert2";
 import { isTheSame } from "../shared/validators/isTheSame";
 import { ImageCroppedEvent, ImageCropperModule } from "ngx-image-cropper";
 import { ComicsService } from "../comics/services/comics.service";
+import Swal from "sweetalert2";
+import { IonicModule } from "@ionic/angular";
 
 @Component({
     selector: "ml-users",
@@ -25,6 +26,7 @@ import { ComicsService } from "../comics/services/comics.service";
         ComicCardComponent,
         ReactiveFormsModule,
         ImageCropperModule,
+        IonicModule
     ],
     templateUrl: "./users.component.html",
     styleUrls: ["./users.component.scss"],
@@ -35,7 +37,6 @@ export class UsersComponent implements OnInit {
     isMe!: boolean;
     haveRoleToAddComic!: boolean;
 
-    favourites;
     userForm!: FormGroup;
     nameControl!: FormControl<string>;
     emailControl!: FormControl<string>;
@@ -53,6 +54,10 @@ export class UsersComponent implements OnInit {
         email: "",
         avatar: "",
     };
+
+    isModalProfileOpen = false;
+    isModalAvatarOpen = false;
+    isModalPasswordOpen = false;
 
     constructor(
         private router: Router,
@@ -113,7 +118,7 @@ export class UsersComponent implements OnInit {
             showDenyButton: true,
             confirmButtonText: "Confirmar",
             denyButtonText: "Cerrar",
-        }).then((result) => {
+        }).then((result: any) => {
             if (result.isConfirmed) {
                 this.userService
                     .saveProfile(
@@ -153,13 +158,14 @@ export class UsersComponent implements OnInit {
             this.haveRoleToAddComic = bool;
         });
         this.isMe = this.userId === this.user._id?.toString();
-        this.user.favorites.forEach((idComic) => {
+
+        this.user.favorites != undefined ? this.user.favorites.forEach((idComic) => {
             this.comicService.getIdComic(idComic.toString()).subscribe({
                 next: (comic) => {
                     this.comics.push(comic);
                 },
             });
-        });
+        }) : null;
     }
 
     savePassword(): void {
@@ -268,5 +274,9 @@ export class UsersComponent implements OnInit {
 
     goToAddComic(): void {
         this.router.navigate(["/comics/add"]);
+    }
+
+    setModalOpenOrClose(state: boolean, modalName: boolean): void {
+      modalName = state;
     }
 }
