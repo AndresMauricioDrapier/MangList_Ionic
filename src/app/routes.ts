@@ -1,7 +1,6 @@
 import { Routes } from "@angular/router";
+import { logoutActivateGuard } from "./guards/logoutActivateGuard.guard";
 // import { loginActivateGuard } from "./app/guards/loginActivateGuard.guard";
-// import { logoutActivateGuard } from "./app/guards/logoutActivateGuard.guard";
-
 export const APP_ROUTES: Routes = [
     {
         path: "",
@@ -12,7 +11,7 @@ export const APP_ROUTES: Routes = [
         path: "auth",
         loadChildren: () =>
             import("./auth/auth.routes").then((p) => p.AUTH_ROUTES),
-        // canActivate: [logoutActivateGuard],
+        canActivate: [logoutActivateGuard],
     },
     // {
     //     path: "about",
