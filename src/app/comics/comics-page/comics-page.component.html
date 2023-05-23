@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #pageTop>
 
   <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadProducts(refresher)">
     <ion-refresher-content>
@@ -36,3 +36,9 @@
   </ion-list>
 
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button color="principal">
+    <ion-icon name="arrow-up" (click)="pageScroller()"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

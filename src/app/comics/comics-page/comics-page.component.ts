@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ComicyRanking } from '../interfaces/comics';
 import { Genres } from '../interfaces/categories';
 import {
@@ -86,7 +86,14 @@ export class ComicsPageComponent implements OnInit {
       });
     }
   }
+
   handleChange(e: any) {
     this.genreValue = e.detail.value;
+  }
+
+  @ViewChild('pageTop') pageTop: any;
+
+  public pageScroller() {
+    this.pageTop.scrollToTop();
   }
 }
