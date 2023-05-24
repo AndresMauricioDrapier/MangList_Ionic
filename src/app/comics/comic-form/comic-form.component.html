@@ -1,0 +1,107 @@
+<!-- Contendor principal -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="!withID">Nuevo Comic</ion-title>
+    <ion-title *ngIf="withID">Editar {{newComic.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form action="#" (ngSubmit)="addComic()" [formGroup]="comicForm" novalidate>
+
+    <ion-item>
+      <ion-img *ngIf="!newComic.main_picture.medium" src="assets/utiles/portada_registro_ejemplo.jpg" alt="Portada"
+        class="img-fluid mt-5 imgExample" />
+      <ion-img *ngIf="newComic.main_picture.medium" src="{{newComic.main_picture.medium}}" alt="Portada"
+        class="img-fluid mt-5" />
+    </ion-item>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label>Titulo: </ion-label>
+        <ion-input type="text" name="name" formControlName="title" placeholder="Berserk: the best" required></ion-input>
+        <ion-text *ngIf=" titleControl.touched && titleControl.errors?.['required']">Titulo es necesario
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Sypnosis: </ion-label>
+        <ion-textarea type="textarea" name="Sypnosis" formControlName="synopsis" placeholder="..."
+          required></ion-textarea>
+        <ion-text *ngIf=" synopsisControl.touched && synopsisControl.errors?.['required']">Sypnosis es necesario
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha de inicio: </ion-label>
+        <ion-datetime-button type="date" name="date" formControlName="start_date" placeholder="DD/MM/YYYY"
+          required></ion-datetime-button>
+        <ion-text *ngIf=" start_dateControl.touched && start_dateControl.errors?.['required']">Sypnosis es necesario
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Estado:</ion-label>
+        <ion-select placeholder="Selecione el estado" formControlName="status" class="form-control">
+          <ion-select-option value="currently_publishing">En continuación</ion-select-option>
+          <ion-select-option value="finished">Finalizado</ion-select-option>
+        </ion-select>
+        <ion-text class="invalid-feedback" *ngIf="statusControl.touched&& statusControl.errors?.['required']">
+          El estado es obligatorio.
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Puntuación:</ion-label>
+        <ion-input type="number" min="0" max="10" placeholder="8" name="mean" formControlName="mean" required />
+        <ion-text *ngIf="meanControl.touched && meanControl.errors?.['required']">
+          La puntiación es obligatoria.
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Número volumenes:</ion-label>
+        <ion-input type="number" min="0" placeholder="100" name="num_volumes" formControlName="num_volumes" required />
+        <ion-text *ngIf="num_volumesControl.touched && num_volumesControl.errors?.['required']">
+          El número de volumenes es obligatorio.
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Generos:</ion-label>
+        <ion-input type="text" placeholder="Aventura, Sheinen, Terror, ..." name="genres" formControlName="genres"
+          required />
+        <ion-text *ngIf="genresControl.touched && genresControl.errors?.['required']">
+          Los generos son obligatorios.
+        </ion-text>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="inset">Portada: </ion-label>
+        <ion-button color="secondary" (click)="takePhoto()">
+          <ion-icon name="camera" slot="start"></ion-icon>
+          Camera
+        </ion-button>
+        <ion-button color="tertiary" (click)="pickFromGallery()">
+          <ion-icon name="images" slot="start"></ion-icon>
+          Gallery
+        </ion-button>
+      </ion-item>
+
+    </ion-list>
+
+
+
+    <ion-button type="reset" (click)="resetForm()" color="primary">Resetear</ion-button>
+    <ion-button type="submit" [disabled]="comicForm.invalid || !newComic.main_picture" color="primary">Nuevo
+      Comic</ion-button>
+
+  </form>
+
+</ion-content>
