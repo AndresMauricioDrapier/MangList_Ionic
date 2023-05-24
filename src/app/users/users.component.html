@@ -1,158 +1,3 @@
-<!-- <div class="overflow-hidden">
-  <div class="px-4 pt-0 pb-4 cover" id="cabeceraUsuario">
-    <div class="media align-items-end profile-head">
-
-      <div class="mb-5 text-white">
-        <small class="role"></small>
-        <div *ngIf="isMe" class="buttonsContainer">
-          <button type="button" *ngIf="haveRoleToAddComic" class="boton newComicButton" (click)="goToAddComic()">
-            Añadir comic nuevo
-          </button>
-
-          <button type="button" class="boton" data-bs-backdrop="false" data-bs-toggle="modal"
-            data-bs-target="#editProfile">
-            Editar perfil
-          </button>
-
-
-
-
-
-
-          <button type="button" class="boton" data-bs-backdrop="false" data-bs-toggle="modal"
-            data-bs-target="#editAvatar">
-            Editar avatar
-          </button>
-
-          <div class="modal fade" id="editAvatar" tabindex="-1" aria-labelledby="editAvatarLabel" aria-hidden="true"
-            data-bs-backdrop="false">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="editAvatarLabel">Editar perfil:</h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form class="h-100" method="PUT" role="form" (ngSubmit)="saveAvatar()" [formGroup]="userForm"
-                    aria-label="">
-                    <div class="form-outline mb-4">
-                      <div class="form-outline">
-                        <input type="file" class="form-control" id="avatar" name="avatar" formControlName="avatar"
-                          required data-bs-toggle="modal" data-bs-target="#exampleModal"
-                          (change)="fileChangeEvent($event)" formControlName="avatar" />
-                      </div>
-                    </div>
-
-                    <div class="form-outline">
-                      <img [src]="newAvatar" class="mb-1 previewAvatar" *ngIf="!(newAvatar ==='')?'d-none':''"
-                        alt="avatar">
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="boton" data-bs-dismiss="modal">Cerrar</button>
-                      <button type="submit" class="boton">Guardar cambios</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button type="button" class="boton editPassButton" data-bs-backdrop="false" data-bs-toggle="modal"
-            data-bs-target="#editPass">
-            Editar contraseña
-          </button>
-
-          <div class="modal fade" id="editPass" tabindex="-1" aria-labelledby="editPassLabel" aria-hidden="true"
-            data-bs-backdrop="false">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="editPassLabel">Editar contraseña:</h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form class="h-100" method="PUT" role="form" (ngSubmit)="savePassword()" [formGroup]="passForm"
-                    aria-label="">
-                    <div class="mb-3">
-                      <input type="password" class="form-control" id="password" name="password"
-                        placeholder="Contraseña:" name="password" formControlName="password"
-                        [ngClass]="validClasses(passwordControl)" required />
-
-                      <div class="invalid-feedback" *ngIf="passwordControl.errors?.['pattern']">
-                        La contraseña tiene que tener almenos 8 caracteres y caracteres especiales como: ! @ # $ % & / (
-                        ) =
-                        + ? [ ] ~ – . ^
-                      </div>
-                      <div class="invalid-feedback" *ngIf="passwordControl.errors?.['required']">
-                        Password is required
-                      </div>
-                    </div>
-
-                    <div class="form-outline mb-4">
-                      <input type="password" class="form-control" id="password2" name="password2"
-                        placeholder="Repita contraseña:" name="password2" formControlName="password2"
-                        [ngClass]="validClasses(password2Control)" required />
-
-                      <div class="invalid-feedback" *ngIf="password2Control.errors">
-                        Las contraseñas no son iguales:
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="boton" data-bs-dismiss="modal">Cerrar</button>
-                      <button type="submit" class="boton">Guardar cambios</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!-- </div> -->
-
-<!-- POPUP PARA EL AVATAR CROPPER -->
-
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content rounded">
-
-      <div class="modal-body">
-
-        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
-          [roundCropper]=true format="png" (imageCropped)="imageCropped($event)"></image-cropper>
-
-      </div>
-
-      <div class="modal-footer">
-        <button type=" button" class="btn btn-block btn-lg" style="
-                  color: white;
-                  background-color: #060d17;
-                  border-radius: 30px;
-                  border: 0;
-                  width: 48%;
-                " data-bs-dismiss="modal">
-          Cerrar
-        </button>
-        <button type="button" class="btn btn-block btn-lg" style="
-                  color: white;
-                  background-color: #a309cd;
-                  border-radius: 30px;
-                  border: 0;
-                  width: 48%;
-                " data-bs-dismiss="modal" (click)="saveImage()">
-          Guardar imagen
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <ion-header>
   <ion-toolbar color="principal">
     <ion-buttons slot="start">
@@ -165,9 +10,8 @@
 
 <ion-content>
   <ion-card *ngIf="user">
-    <ion-item class="contenedorImagen"><ion-img src="{{user.avatar}}" alt="{{user.name}}" width="130"
-        class="rounded mb-2 imagen"></ion-img>
-    </ion-item>
+    <ion-avatar><ion-img src="{{user.avatar}}" alt="{{user.name}}"></ion-img>
+    </ion-avatar>
     <ion-card-header>
       <ion-card-subtitle>(Rol: {{user.role}})</ion-card-subtitle>
     </ion-card-header>
@@ -181,23 +25,23 @@
     <ion-item>
       <h3>Comics favoritos:</h3>
     </ion-item>
-    <ion-item *ngFor="let comic of comics">
+    <ion-item *ngFor="let comic of comics" class="comicsContainter">
       <ml-comic-card [comic]="comic"></ml-comic-card>
     </ion-item>
   </ion-card>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" color="principal">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" color="principal" *ngIf="isMe">
     <ion-fab-button color="principal">
       <ion-icon name="chevron-up-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="principal" (click)="isModalProfileOpen = true">
+      <ion-fab-button color="principal" id="presentAlertProfile">
         <ion-icon name="person"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="principal" (click)="isModalAvatarOpen = true">
         <ion-icon name="camera"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="principal" (click)="isModalPasswordOpen = true">
+      <ion-fab-button color="principal" id="presentAlertPassword">
         <ion-icon name="keypad"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="principal" (click)="goToAddComic()">
@@ -206,29 +50,13 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-modal [isOpen]="isModalProfileOpen">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Editar perfil:</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="isModalProfileOpen = false">Cerrar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <form method="PUT" role="form" (ngSubmit)="saveUser()" [formGroup]="userForm" aria-label="">
-          <ion-input type="text" placeholder="Usuario" [ngClass]="validClasses(nameControl)" formControlName="name"
-            required></ion-input>
-          <ion-input type="email" placeholder="ejemplo@gmail.com" [ngClass]="validClasses(emailControl)"
-            formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></ion-input>
 
-          <ion-button type="submit" color="principal">Guardar cambios</ion-button>
-        </form>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  <ion-alert color="principal" trigger="presentAlertProfile" header="Introduce los nuevos datos:"
+    [buttons]="alertButtons" [inputs]="alertProfileInputs" (didDismiss)="saveUser($event)"></ion-alert>
 
+  <!-- <ion-alert color="principal" trigger="presentAlertAvatar" header="Introduce el nuevo avatar:" [buttons]="alertButtons"
+    [inputs]="alertAvatarInputs" (didDismiss)="saveAvatar($event)">
+  </ion-alert> -->
   <ion-modal [isOpen]="isModalAvatarOpen">
     <ng-template>
       <ion-header>
@@ -240,33 +68,26 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
-          reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
-          dicta.
-        </p>
+        <ion-avatar style="margin-bottom: 1em;" *ngIf="newAvatar !== ''" >
+          <ion-img src="{{newAvatar}}" alt="Preview imagen perfil"></ion-img>
+        </ion-avatar>
+        <ion-item style="margin-bottom: 1em;">
+          <ion-label position="inset">Avatar</ion-label>
+          <ion-button color="secondary" (click)="takePhoto()">
+            <ion-icon name="camera" slot="start"></ion-icon>
+            Camera
+          </ion-button>
+          <ion-button color="tertiary" (click)="pickFromGallery()">
+            <ion-icon name="images" slot="start"></ion-icon>
+            Gallery
+          </ion-button>
+        </ion-item>
+        <ion-button type="button" color="principal" (click)="saveAvatar()">Guardar cambios</ion-button>
       </ion-content>
     </ng-template>
   </ion-modal>
 
-  <ion-modal [isOpen]="isModalPasswordOpen">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Editar contraseña:</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="isModalPasswordOpen = false">Cerrar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
-          reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
-          dicta.
-        </p>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  <ion-alert color="principal" trigger="presentAlertPassword" header="Introduce la nueva contraseña:"
+    [buttons]="alertButtons" [inputs]="alertPasswordInputs" (didDismiss)="savePassword($event)"></ion-alert>
 
 </ion-content>

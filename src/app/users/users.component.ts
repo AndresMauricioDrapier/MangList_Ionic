@@ -5,29 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Comic } from '../comics/interfaces/comics';
 import { Auth } from '../auth/interfaces/auth';
 import { UsersService } from './services/users.service';
-import {
-  FormControl,
-  FormGroup,
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { isTheSame } from '../shared/validators/isTheSame';
-import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
 import { ComicsService } from '../comics/services/comics.service';
-import Swal from 'sweetalert2';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { validateEmail } from '../shared/validators/emailValidator';
+import { validatePassword } from '../shared/validators/passwordValidator';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ml-users',
   standalone: true,
-  imports: [
-    CommonModule,
-    ComicCardComponent,
-    ReactiveFormsModule,
-    ImageCropperModule,
-    IonicModule,
-  ],
+  imports: [CommonModule, ComicCardComponent, IonicModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
@@ -37,34 +25,59 @@ export class UsersComponent implements OnInit {
   isMe!: boolean;
   haveRoleToAddComic!: boolean;
 
-  userForm!: FormGroup;
-  nameControl!: FormControl<string>;
-  emailControl!: FormControl<string>;
-
-  passForm!: FormGroup;
-  passwordControl!: FormControl<string>;
-  password2Control!: FormControl<string>;
-
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
-
-  newAvatar = '';
+  newAvatar: string = "";
+  isModalAvatarOpen = false;
 
   user: Auth = {
     email: '',
     avatar: '',
   };
 
-  isModalProfileOpen = false;
-  isModalAvatarOpen = false;
-  isModalPasswordOpen = false;
+  public alertButtons = [
+    {
+      text: 'Guardar',
+      role: true,
+    },
+    {
+      text: 'Cerrar',
+      role: false,
+    },
+  ];
+  public alertProfileInputs = [
+    {
+      type: 'text',
+      placeholder: 'Nombre',
+    },
+    {
+      type: 'email',
+      placeholder: 'Email',
+    },
+  ];
+
+  public alertAvatarInputs = [
+    {
+      type: 'image',
+      placeholder: 'Avatar',
+    },
+  ];
+
+  public alertPasswordInputs = [
+    {
+      type: 'password',
+      placeholder: 'Contraseña',
+    },
+    {
+      type: 'password',
+      placeholder: 'Repita la contraseña',
+    },
+  ];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private userService: UsersService,
     private readonly comicService: ComicsService,
-    private readonly fb: NonNullableFormBuilder
+    private alertController: AlertController
   ) {}
 
   ngOnInit(): void {
@@ -77,78 +90,6 @@ export class UsersComponent implements OnInit {
           this.user = u;
           this.makeAtInit();
         });
-      }
-    });
-
-    this.nameControl = this.fb.control('', [
-      Validators.required,
-      Validators.pattern('[a-zA-Z ]+'),
-    ]);
-
-    this.emailControl = this.fb.control('', [
-      Validators.required,
-      Validators.email,
-    ]);
-
-    this.userForm = this.fb.group({
-      name: this.nameControl,
-      email: this.emailControl,
-    });
-
-    this.passwordControl = this.fb.control('', [
-      Validators.required,
-      Validators.pattern(
-        '^(?=.*[!@#$%&/.()=+?\\[\\]~\\-^0-9])[a-zA-Z0-9!@#$%&./()=+?\\[\\]~\\-^]{8,}$'
-      ),
-    ]);
-    this.password2Control = this.fb.control('', [
-      Validators.required,
-      isTheSame(this.passwordControl),
-    ]);
-
-    this.passForm = this.fb.group({
-      password: this.passwordControl,
-      password2: this.password2Control,
-    });
-  }
-
-  saveUser(): void {
-    this.isModalProfileOpen = false;
-    Swal.fire({
-      title: '¿Seguro que quieres el usuario?',
-      showDenyButton: true,
-      confirmButtonText: 'Confirmar',
-      denyButtonText: 'Cerrar',
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        this.userService
-          .saveProfile(this.nameControl.value, this.emailControl.value)
-          .subscribe({
-            next: () => {
-              this.isModalProfileOpen = false;
-              Swal.fire({
-                title: 'Usuario guardado',
-                icon: 'success',
-              });
-              this.router.navigate(['/users', this.userId]);
-            },
-            error: (err) => {
-              Swal.fire({
-                title: 'Usuario descartado',
-                text: err,
-                icon: 'error',
-              });
-              this.router.navigate(['/users', this.userId]);
-            },
-          });
-        return true;
-      } else {
-        this.isModalProfileOpen = false;
-        Swal.fire({
-          title: 'Usuario descartado',
-          icon: 'error',
-        });
-        return false;
       }
     });
   }
@@ -170,108 +111,168 @@ export class UsersComponent implements OnInit {
       : null;
   }
 
-  savePassword(): void {
-    Swal.fire({
-      title: '¿Seguro que quieres cambiar la contraseña?',
-      showDenyButton: true,
-      confirmButtonText: 'Confirmar',
-      denyButtonText: 'Cerrar',
-    }).then((result) => {
-      if (result.isConfirmed) {
+  async saveUser(profile: any): Promise<void> {
+    console.log(profile.detail.data);
+    if (profile.detail.role) {
+      let user =
+        profile.detail.data.values[0] !== ''
+          ? profile.detail.data.values[0]
+          : this.user.name!;
+      let email =
+        profile.detail.data.values[1] !== ''
+          ? profile.detail.data.values[1]
+          : this.user.email!;
+      if (validateEmail(email)) {
+        this.userService.saveProfile(user, email).subscribe({
+          next: async () => {
+            const alert = await this.alertController.create({
+              header: '¡Perfil editado!',
+              message: 'El perfil se ha editado correctamente.',
+              buttons: ['Aceptar'],
+            });
+            await alert.present();
+            this.router.navigate(['/users', this.userId]);
+          },
+          error: async (err) => {
+            const alert = await this.alertController.create({
+              header: '¡Usuario descartado!',
+              message: 'El perfil se ha descartado.',
+              buttons: ['Aceptar'],
+            });
+            await alert.present();
+            this.router.navigate(['/users', this.userId]);
+          },
+        });
+      } else {
+        const alert = await this.alertController.create({
+          header: '¡Email incorrecto!',
+          message: 'El email no es correcto.',
+          buttons: ['Aceptar'],
+        });
+        await alert.present();
+      }
+    } else {
+      const alert = await this.alertController.create({
+        header: '¡Usuario descartado!',
+        message: 'El perfil se ha descartado.',
+        buttons: ['Aceptar'],
+      });
+      await alert.present();
+    }
+  }
+
+  async savePassword(password: any): Promise<void> {
+    let pass1 = password.detail.data.values[0];
+    let pass2 = password.detail.data.values[1];
+    if (validatePassword(pass1)) {
+      if (password.detail.role && pass1 === pass2) {
         this.userService
-          .savePassword(this.passwordControl.value, this.password2Control.value)
+          .savePassword(
+            password.detail.data.values[0],
+            password.detail.data.values[1]
+          )
           .subscribe({
-            next: () => {
-              Swal.fire({
-                title: 'Contraseña guardada',
-                icon: 'success',
+            next: async () => {
+              const alert = await this.alertController.create({
+                header: '¡Contraseña editada!',
+                message: 'la contraseña ha sido editada con exito.',
+                buttons: ['Aceptar'],
               });
+              await alert.present();
               this.router.navigate(['/users/', this.userId]);
             },
-            error: (err) => {
-              Swal.fire({
-                title: 'Contraseña descartada',
-                text: err,
-                icon: 'error',
+            error: async (err) => {
+              const alert = await this.alertController.create({
+                header: '¡Cancelado!',
+                message: 'la contraseña no ha podido cambiarse.',
+                buttons: ['Aceptar'],
               });
+              await alert.present();
               this.router.navigate(['/users', this.userId]);
             },
           });
-        return true;
       } else {
-        Swal.fire({
-          title: 'Contraseña descartada',
-          icon: 'error',
+        const alert = await this.alertController.create({
+          header: '¡Cancelado!',
+          message: 'La contraseña no se ha cambiado.',
+          buttons: ['Aceptar'],
         });
-        return false;
+        await alert.present();
       }
-    });
+    } else {
+      const alert = await this.alertController.create({
+        header: '¡Contraseña incorrecta!',
+        message: 'La contraseña no es correcta.',
+        buttons: ['Aceptar'],
+      });
+      await alert.present();
+    }
   }
 
-  saveAvatar(): void {
-    Swal.fire({
-      title: '¿Seguro que quieres cambiar el avatar?',
-      showDenyButton: true,
-      confirmButtonText: 'Confirmar',
-      denyButtonText: 'Cerrar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userService
-          .saveAvatar(this.newAvatar, this.user.name!, this.user.avatar!)
-          .subscribe({
-            next: () => {
-              Swal.fire({
-                title: 'Avatar guardado',
-                icon: 'success',
-              });
-              this.router.navigate(['/users', this.userId]);
-            },
-            error: (err) => {
-              Swal.fire({
-                title: 'Avatar descartada',
-                text: err,
-                icon: 'error',
-              });
-              this.router.navigate(['/users', this.userId]);
-            },
-          });
-        return true;
-      } else {
-        Swal.fire({
-          title: 'Contraseña descartada',
-          icon: 'error',
+  async saveAvatar(): Promise<void> {
+    if (this.newAvatar) {
+      this.userService
+        .saveAvatar(this.newAvatar, this.user.name!, this.user.avatar!)
+        .subscribe({
+          next: async () => {
+            const alert = await this.alertController.create({
+              header: '¡Avatar guardado!',
+              message: 'El avatar se ha editado correctamente.',
+              buttons: ['Aceptar'],
+            });
+            this.isModalAvatarOpen = false;
+            await alert.present();
+            this.router.navigate(['/users', this.userId]);
+          },
+          error: async (err) => {
+            console.log(err);
+            const alert = await this.alertController.create({
+              header: '¡Cancelado!',
+              message: 'El avatar no ha podido cambiarse.',
+              buttons: ['Aceptar'],
+            });
+            this.isModalAvatarOpen = false;
+            await alert.present();
+            this.router.navigate(['/users', this.userId]);
+          },
         });
-        return false;
-      }
-    });
-  }
-
-  fileChangeEvent(event: unknown): void {
-    this.imageChangedEvent = event;
-  }
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-  }
-  saveImage() {
-    this.newAvatar = this.croppedImage;
-  }
-
-  validClasses(
-    ngModel: FormControl,
-    validClass = 'is-valid',
-    errorClass = 'is-invalid'
-  ): object {
-    return {
-      [validClass]: ngModel.touched && ngModel.valid,
-      [errorClass]: ngModel.touched && ngModel.invalid,
-    };
+    } else {
+      const alert = await this.alertController.create({
+        header: '¡Cancelado!',
+        message: 'El avatar no se ha cambiado.',
+        buttons: ['Aceptar'],
+      });
+      this.isModalAvatarOpen = false;
+      await alert.present();
+    }
   }
 
   goToAddComic(): void {
     this.router.navigate(['/comics/add']);
   }
 
-  setModalOpenOrClose(state: boolean, modalName: boolean): void {
-    modalName = state;
+  async takePhoto() {
+    const photo = await Camera.getPhoto({
+      source: CameraSource.Camera,
+      quality: 90,
+      height: 640,
+      width: 640,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+    });
+
+    this.newAvatar = photo.dataUrl as string;
+  }
+
+  async pickFromGallery() {
+    const photo = await Camera.getPhoto({
+      source: CameraSource.Photos,
+      height: 640,
+      width: 640,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+    });
+
+    this.newAvatar = photo.dataUrl as string;
   }
 }

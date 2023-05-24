@@ -4,7 +4,6 @@ import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Auth, AuthLogin } from '../interfaces/auth';
 import { AuthService } from '../services/auth.service';
-import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
 import { AlertController, IonicModule, ToastController } from '@ionic/angular';
 import { MailService } from 'src/app/shared/mail/services/mail.service';
 import { Mail } from 'src/app/shared/mail/interfaces/mail';
@@ -18,7 +17,6 @@ import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
     CommonModule,
     FormsModule,
     RouterModule,
-    ImageCropperModule,
     IonicModule,
     MatchValidator,
   ],
@@ -114,23 +112,6 @@ export class AuthRegisterComponent implements OnInit {
         console.error('Error al enviar el mail' + e);
       },
     });
-  }
-
-  fileChangeEvent(event: unknown): void {
-    this.imageChangedEvent = event;
-  }
-
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-  }
-
-  saveImage() {
-    this.newUser.avatar = this.croppedImage;
-  }
-
-  closeModal() {
-    this.imageChangedEvent = '';
-    this.croppedImage = '';
   }
 
   resetForm() {

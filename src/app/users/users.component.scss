@@ -1,21 +1,24 @@
-.contenedorImagen {
-  margin: auto;
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  box-shadow: 0 0 5px #a309cd;
+ion-avatar {
+  width: 10em;
+  height: 10em;
+  border: 3px solid #a309cd;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 1em;
-
-  ion-img {
-    width: 150% !important;
-    height: 150% !important;
-  }
 }
-
-ion-card-subtitle{
+ion-card-subtitle {
   text-align: center;
 }
 
-ion-input{
+ion-input {
   margin-bottom: 0.5em;
+}
+
+.comicsContainter {
+  margin-left: auto;
+  margin-right: auto;
+
+  ml-comic-card {
+    text-align: center;
+  }
 }
