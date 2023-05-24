@@ -22,17 +22,17 @@ export const COMICS_ROUTES: Routes = [
     //     comic: comicResolve,
     // },
   },
-  // {
-  //     path: "comics/add",
-  //     loadComponent: () =>
-  //         import("./comic-form/comic-form.component").then(
-  //             (m) => m.ComicFormComponent
-  //         ),
-  //         canActivate: [loginActivateGuard],
-  //     // resolve: {
-  //     //     comic: comicResolve,
-  //     // },
-  // },
+  {
+      path: "comics/add",
+      loadComponent: () =>
+          import("./comic-form/comic-form.component").then(
+              (m) => m.ComicFormComponent
+          ),
+          // canActivate: [loginActivateGuard],
+      // resolve: {
+      //     comic: comicResolve,
+      // },
+  },
   {
     path: 'comics/:id',
     loadComponent: () =>
