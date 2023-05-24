@@ -7,12 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Comic } from '../interfaces/comics';
-import { CanDeactivateComponent } from 'src/app/guards/leavePageGuard.guard';
 import { Genres } from '../interfaces/categories';
 import { ComicsService } from '../services/comics.service';
 import { UsersService } from 'src/app/users/services/users.service';
@@ -25,7 +22,6 @@ import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ImageCropperModule,
     RouterModule,
     IonicModule,
   ],
@@ -33,19 +29,15 @@ import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
   styleUrls: ['./comic-form.component.scss'],
 })
 export class ComicFormComponent implements OnInit {
+
   comicForm!: FormGroup;
   titleControl!: FormControl<string>;
-  main_pictureControl!: FormControl<string>;
   synopsisControl!: FormControl<string>;
-  start_dateControl!: FormControl<string>;
   genresControl!: FormControl<string>;
   num_volumesControl!: FormControl<number>;
   statusControl!: FormControl<string>;
   meanControl!: FormControl<number>;
 
-  exit = false;
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
   withID = '';
 
   newComic: Comic = {
@@ -55,12 +47,13 @@ export class ComicFormComponent implements OnInit {
       large: '',
     },
     synopsis: '',
-    start_date: '',
+    start_date: (new Date).toLocaleDateString('en-CA'),
     genres: [{ id: 0, name: '' }],
     num_volumes: 0,
     status: '',
     mean: 0,
   };
+
 
   constructor(
     private readonly router: Router,
@@ -77,18 +70,14 @@ export class ComicFormComponent implements OnInit {
       }
     });
     this.titleControl = this.fb.control('', [Validators.required]);
-    this.main_pictureControl = this.fb.control('', [Validators.required]);
     this.synopsisControl = this.fb.control('', [Validators.required]);
-    this.start_dateControl = this.fb.control('', [Validators.required]);
     this.genresControl = this.fb.control('', [Validators.required]);
     this.num_volumesControl = this.fb.control(0, [Validators.required]);
     this.statusControl = this.fb.control('');
     this.meanControl = this.fb.control(0, [Validators.required]);
     this.comicForm = this.fb.group({
       title: this.titleControl,
-      main_picture: this.main_pictureControl,
       synopsis: this.synopsisControl,
-      start_date: this.start_dateControl,
       genres: this.genresControl,
       num_volumes: this.num_volumesControl,
       status: this.statusControl,
@@ -108,11 +97,7 @@ export class ComicFormComponent implements OnInit {
               else genresComic += e.name;
             });
             this.titleControl.setValue(this.newComic.title);
-            this.main_pictureControl.setValue(
-              this.newComic.main_picture.medium
-            );
             this.synopsisControl.setValue(this.newComic.synopsis!);
-            this.start_dateControl.setValue(this.newComic.start_date!);
             this.genresControl.setValue(genresComic);
             this.num_volumesControl.setValue(this.newComic.num_volumes!);
             this.statusControl.setValue(this.newComic.status!);
@@ -126,11 +111,9 @@ export class ComicFormComponent implements OnInit {
     });
   }
 
-
   addComic() {
     this.newComic.title = this.titleControl.value;
     this.newComic.synopsis = this.synopsisControl.value;
-    this.newComic.start_date = this.start_dateControl.value;
     this.newComic.genres = this.giveGenresArray();
     this.newComic.num_volumes = Number(this.num_volumesControl.value);
     this.newComic.status = this.statusControl.value;
@@ -169,6 +152,11 @@ export class ComicFormComponent implements OnInit {
       });
     }
   }
+  fechaSeleccionada(event:any){
+    const fechaSeleccionada = event.detail.value;
+    const fechaFormateada = new Date(fechaSeleccionada).toLocaleDateString('en-CA');
+    this.newComic.start_date = fechaFormateada
+  }
 
   giveGenresArray(): { id: number; name: string }[] {
     const arrayGenres = this.genresControl.value.split(',');
@@ -188,25 +176,6 @@ export class ComicFormComponent implements OnInit {
     }
     return arrayObject;
   }
-
-
-  // fileChangeEvent(event: unknown): void {
-  //     this.imageChangedEvent = event;
-  // }
-
-  // imageCropped(event: ImageCroppedEvent) {
-  //     this.croppedImage = event.base64;
-  // }
-
-  // saveImage() {
-  //     this.newComic.main_picture.large = this.croppedImage;
-  //     this.newComic.main_picture.medium = this.croppedImage;
-  // }
-
-  // closeModal() {
-  //     this.imageChangedEvent = "";
-  //     this.croppedImage = "";
-  // }
 
   resetForm() {
     this.comicForm.reset();
