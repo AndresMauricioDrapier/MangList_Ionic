@@ -4,8 +4,6 @@ import { RouterLink } from '@angular/router';
 import {
   IonicModule,
   NavController,
-  Platform,
-  ToastController,
 } from '@ionic/angular';
 import { AuthService } from './auth/services/auth.service';
 @Component({
@@ -40,8 +38,12 @@ export class AppComponent implements OnInit {
     this.authService.loginChange$.subscribe((t) => (this.loggedIn = t));
   }
 
-  async logout() {
-    await this.authService.logout();
+  logout() {
+    this.authService.logout();
     this.nav.navigateRoot(['/auth/login']);
+  }
+
+  goToProfile() {
+    this.nav.navigateRoot(['/users/me']);
   }
 }

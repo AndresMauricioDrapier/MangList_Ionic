@@ -24,6 +24,13 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle *ngIf="loggedIn" auto-hide="false">
+            <ion-item (click)="goToProfile()" lines="none" detail="false">
+              <ion-icon slot="start" name="person"></ion-icon>
+              <ion-label>Perfil</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle *ngIf="loggedIn" auto-hide="false">
             <ion-item (click)="logout()" lines="none" detail="false">
               <ion-icon slot="start" name="exit"></ion-icon>
               <ion-label>Logout</ion-label>

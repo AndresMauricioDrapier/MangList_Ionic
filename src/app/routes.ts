@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { logoutActivateGuard } from "./guards/logoutActivateGuard.guard";
-// import { loginActivateGuard } from "./app/guards/loginActivateGuard.guard";
+import { loginActivateGuard } from "./guards/loginActivateGuard.guard";
+
 export const APP_ROUTES: Routes = [
     {
         path: "",
@@ -27,12 +28,12 @@ export const APP_ROUTES: Routes = [
                 (p) => p.CONTACT_ROUTES
             ),
     },
-    // {
-    //     path: "users",
-    //     loadChildren: () =>
-    //         import("./app/users/users.routes").then((p) => p.USER_ROUTES),
-    //     canActivate: [loginActivateGuard],
-    // },
+    {
+        path: "users",
+        loadChildren: () =>
+            import("../app/users/users.routes").then((p) => p.USER_ROUTES),
+        canActivate: [loginActivateGuard],
+    },
     // {
     //     path: "subscriptions",
     //     loadChildren: () =>
