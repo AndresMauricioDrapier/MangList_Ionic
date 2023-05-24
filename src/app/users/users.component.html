@@ -44,7 +44,7 @@
       <ion-fab-button color="principal" id="presentAlertPassword">
         <ion-icon name="keypad"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="principal" (click)="goToAddComic()">
+      <ion-fab-button *ngIf="haveRoleToAddComic" color="principal" (click)="goToAddComic()">
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>

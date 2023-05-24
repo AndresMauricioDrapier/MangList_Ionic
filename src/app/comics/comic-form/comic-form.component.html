@@ -24,14 +24,15 @@
 
       <ion-item>
         <ion-label>Titulo: </ion-label>
-        <ion-input type="text" name="name" formControlName="title" placeholder="Berserk: the best" required></ion-input>
+        <ion-input type="text" name="title" formControlName="title" placeholder="Berserk: the best"
+          required></ion-input>
         <ion-text *ngIf=" titleControl.touched && titleControl.errors?.['required']">Titulo es necesario
         </ion-text>
       </ion-item>
 
       <ion-item>
         <ion-label>Sypnosis: </ion-label>
-        <ion-textarea type="textarea" name="Sypnosis" formControlName="synopsis" placeholder="..."
+        <ion-textarea type="textarea" name="sypnosis" formControlName="synopsis" placeholder="..."
           required></ion-textarea>
         <ion-text *ngIf=" synopsisControl.touched && synopsisControl.errors?.['required']">Sypnosis es necesario
         </ion-text>
@@ -39,15 +40,18 @@
 
       <ion-item>
         <ion-label>Fecha de inicio: </ion-label>
-        <ion-datetime-button type="date" name="date" formControlName="start_date" placeholder="DD/MM/YYYY"
-          required></ion-datetime-button>
-        <ion-text *ngIf=" start_dateControl.touched && start_dateControl.errors?.['required']">Sypnosis es necesario
-        </ion-text>
+        <ion-datetime-button datetime="datetime" type="date" required></ion-datetime-button>
       </ion-item>
+
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime" display-format="DD/MM/YYYY" (ionChange)="fechaSeleccionada($event)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
 
       <ion-item>
         <ion-label>Estado:</ion-label>
-        <ion-select placeholder="Selecione el estado" formControlName="status" class="form-control">
+        <ion-select placeholder="Selecione el estado" formControlName="status" class="form-control" name="status">
           <ion-select-option value="currently_publishing">En continuación</ion-select-option>
           <ion-select-option value="finished">Finalizado</ion-select-option>
         </ion-select>
@@ -99,7 +103,7 @@
 
 
     <ion-button type="reset" (click)="resetForm()" color="primary">Resetear</ion-button>
-    <ion-button type="submit" [disabled]="comicForm.invalid || !newComic.main_picture" color="primary">Nuevo
+    <ion-button type="submit" [disabled]=" comicForm.invalid || newComic.main_picture.medium ==='' " color="primary">Nuevo
       Comic</ion-button>
 
   </form>
