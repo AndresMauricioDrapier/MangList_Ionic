@@ -43,17 +43,17 @@ export const COMICS_ROUTES: Routes = [
       comic: comicResolve,
     },
   },
-  // {
-  //     path: "comics/:id/reading",
-  //     loadComponent: () =>
-  //         import("./comics-reading-page/comics-reading-page.component").then(
-  //             (m) => m.ComicsReadingPageComponent
-  //         ),
-  //     canActivate: [loginActivateGuard, roleActivateGuard],
-  //     resolve: {
-  //         comic: comicResolve,
-  //     },
-  // },
+  {
+      path: "comics/:id/reading",
+      loadComponent: () =>
+          import("./comics-reading-page/comics-reading-page.component").then(
+              (m) => m.ComicsReadingPageComponent
+          ),
+      // canActivate: [loginActivateGuard, roleActivateGuard],
+      // resolve: {
+      //     comic: comicResolve,
+      // },
+  },
   // {
   //     path: "register",
   //     loadComponent: () =>

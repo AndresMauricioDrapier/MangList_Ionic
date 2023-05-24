@@ -1,0 +1,37 @@
+<!-- <h1>Página de lectura de comics:</h1>
+<div id="contenedorLectura" *ngFor="let panel of images">
+  <img src="{{panel}}" alt="{{panel}}">
+</div>
+<div class="prevNextButtons">
+  <button class="button" style="margin-right: 3em;" (click)="goBack()">Volver</button>
+  <button class="button" (click)="goNext()">Siguiente</button>
+</div> -->
+
+<ion-header>
+  <ion-toolbar color="principal">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Leer comic:</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #pageTop>
+  <ion-card>
+    <ion-item *ngFor="let panel of images">
+      <ion-img src="{{panel}}" alt="{{panel}}" style="margin-bottom: 0.5em;"></ion-img>
+    </ion-item>
+
+    <ion-item style="margin-left: 4em;">
+      <ion-button color="principal" (click)="goBack()">Anterior</ion-button>
+      <ion-button color="principal" (click)="goNext()">Siguiente</ion-button>
+    </ion-item>
+  </ion-card>
+</ion-content>
+
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button color="principal">
+    <ion-icon name="arrow-up" (click)="pageScroller()"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
