@@ -14,13 +14,13 @@ export const APP_ROUTES: Routes = [
             import("./auth/auth.routes").then((p) => p.AUTH_ROUTES),
         canActivate: [logoutActivateGuard],
     },
-    // {
-    //     path: "about",
-    //     loadChildren: () =>
-    //         import("./app/about-us/about-us.routes").then(
-    //             (p) => p.ABOUT_ROUTES
-    //         ),
-    // },
+    {
+        path: "about",
+        loadChildren: () =>
+            import("./about-us/about-us.routes").then(
+                (p) => p.ABOUT_ROUTES
+            ),
+    },
     {
         path: "contact",
         loadChildren: () =>

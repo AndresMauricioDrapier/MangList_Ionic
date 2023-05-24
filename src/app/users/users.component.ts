@@ -112,7 +112,6 @@ export class UsersComponent implements OnInit {
   }
 
   async saveUser(profile: any): Promise<void> {
-    console.log(profile.detail.data);
     if (profile.detail.role) {
       let user =
         profile.detail.data.values[0] !== ''
