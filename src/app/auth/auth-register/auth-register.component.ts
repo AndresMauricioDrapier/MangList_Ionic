@@ -1,14 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import {
+  Router,
+  RouterModule
+} from '@angular/router';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Auth, AuthLogin } from '../interfaces/auth';
 import { AuthService } from '../services/auth.service';
-import { AlertController, IonicModule, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  IonicModule,
+  ToastController,
+} from '@ionic/angular';
 import { MailService } from 'src/app/shared/mail/services/mail.service';
 import { Mail } from 'src/app/shared/mail/interfaces/mail';
 import { MatchValidator } from 'src/app/shared/validators/match.validator';
 import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
+import { CanDeactivateComponent } from 'src/app/guards/leavePageGuard.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ml-auth-register',
@@ -23,7 +32,7 @@ import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
   templateUrl: './auth-register.component.html',
   styleUrls: ['./auth-register.component.scss'],
 })
-export class AuthRegisterComponent implements OnInit {
+export class AuthRegisterComponent implements OnInit, CanDeactivateComponent {
   userForm!: FormGroup;
   nameControl!: FormControl<string>;
   emailControl!: FormControl<string>;
@@ -64,8 +73,36 @@ export class AuthRegisterComponent implements OnInit {
     private alertCtrl: AlertController,
     private toast: ToastController
   ) {}
-
   ngOnInit(): void {}
+
+  canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    return new Promise<boolean>(async (resolve) => {
+      const alert = await inject(AlertController).create({
+        header: 'Confirmación',
+        message:
+          '¿Estás seguro de que quieres abandonar esta página? No se guardaran los cambios',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              // El usuario ha cancelado la navegación, así que se queda en la página actual
+              resolve(false);
+            },
+          },
+          {
+            text: 'Aceptar',
+            handler: () => {
+              // El usuario ha aceptado la navegación, así que se permite la salida de la página
+              resolve(true);
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    });
+  }
 
   addUser(): void {
     this.newUser.email = this.newUser.email.toLocaleLowerCase();

@@ -42,12 +42,6 @@ export const APP_ROUTES: Routes = [
             ),
         canActivate: [loginActivateGuard],
     },
-    // {
-    //     path: "User",
-    //     loadChildren: () =>
-    //         import("./users/user.routes").then((p) => p.APP_ROUTES),
-    //     canActivate: [loginActivateGuard],
-    // },
     // Default route (empty) -> Redirect to restaurant page
     { path: "", redirectTo: "/", pathMatch: "full" },
     // Doesn't match any of the above

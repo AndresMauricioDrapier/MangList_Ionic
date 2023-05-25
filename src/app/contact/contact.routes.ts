@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { leavePageGuard } from "../guards/leavePageGuard.guard";
 
 export const CONTACT_ROUTES: Routes = [
     {
@@ -7,7 +8,7 @@ export const CONTACT_ROUTES: Routes = [
             import("./contact.component").then(
                 (m) => m.ContactComponent
             ),
-        // canDeactivate: [leavePageGuard],
+        canDeactivate: [leavePageGuard],
     },
     { path: "**", redirectTo: "manglist/" },
 ];

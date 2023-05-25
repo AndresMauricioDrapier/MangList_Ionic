@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -8,6 +8,8 @@ import {
 import { Mail } from '../shared/mail/interfaces/mail';
 import { MailService } from '../shared/mail/services/mail.service';
 import { AlertController, IonicModule } from '@ionic/angular';
+import { CanDeactivateComponent } from '../guards/leavePageGuard.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ml-contact',
@@ -16,7 +18,7 @@ import { AlertController, IonicModule } from '@ionic/angular';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit,CanDeactivateComponent {
   name = '';
   email = '';
   message = '';
@@ -61,11 +63,32 @@ export class ContactComponent implements OnInit {
       },
     });
   }
+  canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    return new Promise<boolean>(async (resolve) => {
+      const alert = await inject(AlertController).create({
+        header: 'Confirmación',
+        message:
+          '¿Estás seguro de que quieres abandonar esta página? No se guardaran los cambios',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              // El usuario ha cancelado la navegación, así que se queda en la página actual
+              resolve(false);
+            },
+          },
+          {
+            text: 'Aceptar',
+            handler: () => {
+              // El usuario ha aceptado la navegación, así que se permite la salida de la página
+              resolve(true);
+            },
+          },
+        ],
+      });
 
-  validClasses(control: FormControl, validClass: string, errorClass: string) {
-    return {
-      [validClass]: control.touched && control.valid,
-      [errorClass]: control.touched && control.invalid,
-    };
+      await alert.present();
+    });
   }
 }
