@@ -1,13 +1,12 @@
-import { Routes } from "@angular/router";
+import { Routes } from '@angular/router';
+import { leavePageGuard } from '../guards/leavePageGuard.guard';
 
 export const ABOUT_ROUTES: Routes = [
-    {
-        path: "",
-        loadComponent: () =>
-            import("./about-us.component").then(
-                (m) => m.AboutUsComponent
-            ),
-        // canDeactivate: [leavePageGuard],
-    },
-    { path: "**", redirectTo: "manglist/" },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./about-us.component').then((m) => m.AboutUsComponent),
+    canDeactivate: [leavePageGuard],
+  },
+  { path: '**', redirectTo: 'manglist/' },
 ];

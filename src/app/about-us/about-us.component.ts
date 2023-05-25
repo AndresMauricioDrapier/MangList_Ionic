@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { MailService } from '../shared/mail/services/mail.service';
 import { Mail } from '../shared/mail/interfaces/mail';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { validateEmail } from '../shared/validators/emailValidator';
+import { CanDeactivateComponent } from '../guards/leavePageGuard.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ml-about-us',
@@ -13,7 +14,7 @@ import { validateEmail } from '../shared/validators/emailValidator';
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.scss'],
 })
-export class AboutUsComponent {
+export class AboutUsComponent implements CanDeactivateComponent {
   newMail: Mail = {
     from: 'info.manglist@gmail.com',
     subject: 'Subscripción al newsletter',
@@ -39,10 +40,38 @@ export class AboutUsComponent {
   ];
 
   constructor(
-    private readonly router: Router,
     private readonly mailService: MailService,
     private alertController: AlertController
   ) {}
+
+  canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    return new Promise<boolean>(async (resolve) => {
+      const alert = await inject(AlertController).create({
+        header: 'Confirmación',
+        message:
+          '¿Estás seguro de que quieres abandonar esta página? No se guardaran los cambios',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              // El usuario ha cancelado la navegación, así que se queda en la página actual
+              resolve(false);
+            },
+          },
+          {
+            text: 'Aceptar',
+            handler: () => {
+              // El usuario ha aceptado la navegación, así que se permite la salida de la página
+              resolve(true);
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    });
+  }
 
   async addToNewsletter(email: any): Promise<void> {
     if (email.detail.role) {

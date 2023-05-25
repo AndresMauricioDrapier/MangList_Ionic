@@ -8,7 +8,6 @@ export const USER_ROUTES: Routes = [
         path: "",
         loadComponent: () =>
             import("./users.component").then((m) => m.UsersComponent),
-        // canDeactivate: [leavePageGuard],
     },
     {
       path: 'me',
@@ -16,7 +15,6 @@ export const USER_ROUTES: Routes = [
         import('./users.component').then(
           (m) => m.UsersComponent
         ),
-      canDeactivate: [leavePageGuard],
       canActivate: [loginActivateGuard],
     },
     {
@@ -25,7 +23,6 @@ export const USER_ROUTES: Routes = [
         import('./users.component').then(
           (m) => m.UsersComponent
         ),
-      canDeactivate: [leavePageGuard],
       canActivate: [loginActivateGuard],
       resolve: { user: userResolve },
     },

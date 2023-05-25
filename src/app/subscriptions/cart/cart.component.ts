@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule, UrlTree } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule} from '@angular/router';
 import { Subscription } from '../interfaces/subscription';
 import {
   FormControl,
@@ -10,8 +10,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { Payment } from '../interfaces/payment';
-import { CanDeactivateComponent } from 'src/app/guards/leavePageGuard.guard';
-import { Observable } from 'rxjs';
 import { Mail } from 'src/app/shared/mail/interfaces/mail';
 import { MailService } from 'src/app/shared/mail/services/mail.service';
 import { Auth } from 'src/app/auth/interfaces/auth';
@@ -140,30 +138,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-  // canDeactivate():
-  //     | Observable<boolean | UrlTree>
-  //     | Promise<boolean | UrlTree>
-  //     | boolean
-  //     | UrlTree {
-  //     if (this.exit || this.paymentForm.pristine) {
-  //         return true;
-  //     } else {
-  //         return Swal.fire({
-  //             title: "¿Seguro que quieres salir sin hacer el pago?",
-  //             showDenyButton: true,
-  //             confirmButtonText: "Salir",
-  //             denyButtonText: "Quedarme",
-  //         }).then((result) => {
-  //             if (result.isConfirmed) {
-  //                 Swal.fire("Cambios no guardados", "", "info");
-  //                 return true;
-  //             } else {
-  //                 return false;
-  //             }
-  //         });
-  //     }
-  // }
-
   sendMail(): void {
     this.newMail.to = this.user.email;
 
@@ -226,14 +200,4 @@ export class CartComponent implements OnInit {
     });
   }
 
-  validClasses(
-    ngModel: FormControl,
-    validClass = 'is-valid',
-    errorClass = 'is-invalid'
-  ): object {
-    return {
-      [validClass]: ngModel.touched && ngModel.valid,
-      [errorClass]: ngModel.touched && ngModel.invalid,
-    };
-  }
 }

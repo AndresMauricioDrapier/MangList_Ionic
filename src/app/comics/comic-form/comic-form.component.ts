@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -14,6 +14,8 @@ import { ComicsService } from '../services/comics.service';
 import { UsersService } from 'src/app/users/services/users.service';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
+import { CanDeactivateComponent } from 'src/app/guards/leavePageGuard.guard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ml-comic-form',
@@ -27,7 +29,7 @@ import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
   templateUrl: './comic-form.component.html',
   styleUrls: ['./comic-form.component.scss'],
 })
-export class ComicFormComponent implements OnInit {
+export class ComicFormComponent implements OnInit,CanDeactivateComponent {
 
   comicForm!: FormGroup;
   titleControl!: FormControl<string>;
@@ -62,7 +64,34 @@ export class ComicFormComponent implements OnInit {
     private readonly userService: UsersService,
     private alertController: AlertController
   ) {}
+  canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    return new Promise<boolean>(async (resolve) => {
+      const alert = await this.alertController.create({
+        header: 'Confirmación',
+        message:
+          '¿Estás seguro de que quieres abandonar esta página? No se guardaran los cambios',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              // El usuario ha cancelado la navegación, así que se queda en la página actual
+              resolve(false);
+            },
+          },
+          {
+            text: 'Aceptar',
+            handler: () => {
+              // El usuario ha aceptado la navegación, así que se permite la salida de la página
+              resolve(true);
+            },
+          },
+        ],
+      });
 
+      await alert.present();
+    });
+  }
   ngOnInit(): void {
     this.userService.hasRoleToAdd().subscribe((e) => {
       if (!e) {
