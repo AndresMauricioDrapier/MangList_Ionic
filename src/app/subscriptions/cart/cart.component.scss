@@ -1,0 +1,127 @@
+// .ourProducts {
+//   color: #fff !important;
+
+//   &:hover {
+//     color: #a309cd !important;
+//   }
+// }
+
+// .itemsHeader {
+//   color: #fff !important;
+// }
+
+// .navbar-brand {
+//   color: #a309cd !important;
+//   font-weight: bold;
+//   font-size: 2.2em;
+// }
+
+// .bg-dark {
+//   background-color: #060d17 !important;
+// }
+
+// .dropdown-item {
+//   color: white;
+
+//   &:hover {
+//     color: #060d17;
+//   }
+// }
+
+// .form-control {
+//   background-color: #23282e;
+//   border-radius: 20px;
+//   border: 0;
+//   width: 100% !important;
+//   height: 2em;
+
+//   color: white !important;
+// }
+
+// .form-control-2 {
+//   background-color: #060d17 !important;
+// }
+
+// .card {
+//   color: white;
+//   background-color: #23282e;
+//   border: 1px solid #23282E;
+//   -webkit-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+//   -moz-box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+//   box-shadow: 0px 0px 25px 4px rgba(6, 13, 23, 1);
+
+//   .subscriptionContent{
+//     height: 10em;
+//   }
+// }
+
+// .colorWhite {
+//   color: white !important;
+// }
+
+// .imgFormasPago {
+//   width: 100%;
+// }
+
+// .form-label {
+//   font-size: 0.9em;
+// }
+
+// .pulse :hover {
+//   -webkit-animation-name: pulse;
+//   animation-name: pulse;
+//   -webkit-animation-duration: 1s;
+//   animation-duration: 1s;
+//   -webkit-animation-fill-mode: both;
+//   animation-fill-mode: both;
+// }
+
+// @-webkit-keyframes pulse {
+//   0% {
+//     -webkit-transform: scale3d(1, 1, 1);
+//     transform: scale3d(1, 1, 1);
+//   }
+
+//   50% {
+//     -webkit-transform: scale3d(1.05, 1.05, 1.05);
+//     transform: scale3d(1.05, 1.05, 1.05);
+//   }
+
+//   100% {
+//     -webkit-transform: scale3d(1, 1, 1);
+//     transform: scale3d(1, 1, 1);
+//   }
+// }
+
+// @keyframes pulse {
+//   0% {
+//     -webkit-transform: scale3d(1, 1, 1);
+//     transform: scale3d(1, 1, 1);
+//   }
+
+//   50% {
+//     -webkit-transform: scale3d(1.05, 1.05, 1.05);
+//     transform: scale3d(1.05, 1.05, 1.05);
+//   }
+
+//   100% {
+//     -webkit-transform: scale3d(1, 1, 1);
+//     transform: scale3d(1, 1, 1);
+//   }
+// }
+ion-card-title{
+  font-size: 1.5em;
+  font-weight: 900;
+}
+
+ion-img{
+  width: 60%;
+  height: 60%;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ion-button {
+  font-weight: 900;
+}

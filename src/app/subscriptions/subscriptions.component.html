@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="principal">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Subscripciones:</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img alt="Tarifa Basica" src="assets/Iconos/cart/icono_Basic.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title>Basico - 9.99€ / Mes</ion-card-title>
+
+      <ion-card-subtitle>
+        <ion-list>
+          <ion-item>
+            Acceso limitado
+          </ion-item>
+          <ion-item>
+            1 Usuario activo
+          </ion-item>
+          <ion-item>
+            Soporte 27/7
+          </ion-item>
+        </ion-list>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button expand="block" color="principal" [routerLink]="['/subscriptions/cart']"
+        [queryParams]="{id: 1}">Subscribirse</ion-button>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-img alt="Tarifa Basica" src="assets/Iconos/cart/icono_Standart.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title>Standart - 14.99€ / Mes</ion-card-title>
+
+      <ion-card-subtitle>
+        <ion-list>
+          <ion-item>
+            Acceso limitado
+          </ion-item>
+          <ion-item>
+            2 Usuario activo
+          </ion-item>
+          <ion-item>
+            Soporte 27/7
+          </ion-item>
+        </ion-list>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button expand="block" color="principal" [routerLink]="['/subscriptions/cart']"
+        [queryParams]="{id: 2}">Subscribirse</ion-button>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-img alt="Tarifa Basica" src="assets/Iconos/cart/icono_Premium.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title>Premium - 19.99€ / Mes</ion-card-title>
+
+      <ion-card-subtitle>
+        <ion-list>
+          <ion-item>
+            Acceso ilimitado
+          </ion-item>
+          <ion-item>
+            4 Usuario activo
+          </ion-item>
+          <ion-item>
+            Soporte 27/7
+          </ion-item>
+        </ion-list>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button expand="block" color="principal" [routerLink]="['/subscriptions/cart']"
+        [queryParams]="{id: 3}">Subscribirse</ion-button>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
