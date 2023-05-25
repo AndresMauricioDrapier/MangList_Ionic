@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -94,5 +94,12 @@ export class ComicCategoriesComponent implements OnInit {
           .setValue(this.genres.find((g) => g.value === params['filtro']));
       }
     });
+  }
+
+
+  @ViewChild('pageTop') pageTop: any;
+
+  public pageScroller() {
+    this.pageTop.scrollToTop();
   }
 }

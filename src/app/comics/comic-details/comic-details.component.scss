@@ -15,6 +15,14 @@ ion-card-subtitle {
   text-align: center;
   font-size: large;
   font-weight: bold;
+
+  span{
+    color: #a309cd;
+  }
+}
+
+ion-card-content{
+  text-align: justify
 }
 
 ion-grid {

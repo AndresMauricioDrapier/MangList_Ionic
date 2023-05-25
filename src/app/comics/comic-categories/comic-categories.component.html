@@ -7,9 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #pageTop>
   <ion-card>
-
     <ion-list>
       <ion-item>
         <ion-select (ionChange)="handleChangeGenre($event)" interface="popover" placeholder="Seleciona el genero">
@@ -53,4 +52,9 @@
     </ion-list>
   </ion-card>
 </ion-content>
-<!-- /Contendor principal -->
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button color="principal">
+    <ion-icon name="arrow-up" (click)="pageScroller()"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
