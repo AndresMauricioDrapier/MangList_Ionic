@@ -1,3 +1,9 @@
+import { inject } from "@angular/core";
+import { Platform } from "@ionic/angular";
+import { Filesystem } from '@capacitor/filesystem';
+import { FilesystemDirectory } from "@capacitor/filesystem/dist/esm/definitions";
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
@@ -60,7 +66,27 @@ export async function enviarPDFyCorreo(payment:any, subscription:any) {
           },
       },
   };
-  pdfMake.createPdf(documentDefinition).open();
+  let pdf = pdfMake.createPdf(documentDefinition);
+  downloadPdf(pdf)
+}
+
+function downloadPdf(pdf:pdfMake.TCreatedPdf){
+  if(inject(Platform).is('cordova')){
+    pdf.getBase64(async (data)=>{
+      try{
+        let path = 'pdf/SubscripcionMangList.pdf';
+        const result = await Filesystem.writeFile({
+          path:path,
+          data:data,
+          directory:FilesystemDirectory.Documents,
+          recursive:true
+        });
+        inject(FileOpener).open(`${result.uri}`,'application/pdf');
+      }catch(e){
+        console.error('Error al descargar el pdf',e);
+      }
+    })
+  }
 }
 
 async function getImageContent(imageUrl: string): Promise<string> {

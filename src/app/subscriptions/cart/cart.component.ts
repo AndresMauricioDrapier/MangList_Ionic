@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule} from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from '../interfaces/subscription';
 import {
   FormControl,
@@ -176,9 +176,9 @@ export class CartComponent implements OnInit {
           });
           await alert.present();
 
-          enviarPDFyCorreo(this.newPayment, this.subscription);
-
-          this.router.navigate(['/']);
+          enviarPDFyCorreo(this.newPayment, this.subscription).then(() =>
+            this.router.navigate(['/'])
+          );
         } else {
           const alert = await this.alertController.create({
             header: '¡Gracias por la compra!',
@@ -200,5 +200,4 @@ export class CartComponent implements OnInit {
       },
     });
   }
-
 }
