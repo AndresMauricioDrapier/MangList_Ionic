@@ -7,34 +7,32 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-refresher #refresher slot="fixed" (ionRefresh)="reloadProducts(refresher)">
+  <ion-refresher-content>
+  </ion-refresher-content>
+</ion-refresher>
+
 <ion-content #pageTop>
+  <ion-card>
+    <ion-grid>
 
-  <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadProducts(refresher)">
-    <ion-refresher-content>
-    </ion-refresher-content>
-  </ion-refresher>
+      <ion-list>
+        <ion-item>
+          <ion-select aria-label="Genero" placeholder="Filtrar por genero:" (ionChange)="handleChange($event)">
+            <ng-container *ngFor="let g of genres">
+              <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+      </ion-list>
 
-  <ion-grid>
+    </ion-grid>
 
-    <ion-list>
-      <ion-item>
-        <ion-select aria-label="Genero" placeholder="Filtrar por genero:" (ionChange)="handleChange($event)">
-          <ng-container *ngFor="let g of genres">
-            <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
-          </ng-container>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-
-  </ion-grid>
-
-  <ion-list id="contenido">
-    <!-- {{comics |json}} -->
-    <ion-item *ngFor="let comic of comics">
+    <ion-grid id="contenido" *ngFor="let comic of comics">
       <ml-comic-card [comic]="comic.node"></ml-comic-card>
-    </ion-item>
-  </ion-list>
+    </ion-grid>
 
+  </ion-card>
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
