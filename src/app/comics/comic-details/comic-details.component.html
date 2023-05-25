@@ -12,7 +12,7 @@
   <ion-card *ngIf="comic">
     <ion-img alt="{{comic.title}}" src="{{comic.main_picture.medium}}"></ion-img>
     <ion-card-header>
-      <ion-card-subtitle>Puntuación: {{comic.mean}}</ion-card-subtitle>
+      <ion-card-subtitle>Puntuación: <span>{{comic.mean}}</span></ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
