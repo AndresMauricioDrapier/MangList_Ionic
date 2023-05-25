@@ -1,23 +1,4 @@
-<!-- <ng-template ngIf="{{comic.id}}">
-  <a [routerLink]="['/comics',comic.id]" *ngIf="comic.main_picture?.medium">
-    <div class="manga" style="background-image: url({{comic.main_picture.medium}});">
-      <div [ngStyle]="{'opacity': isNew() ? '1' : '0'}" class="nuevo">Nuevo</div>
-      <div [ngStyle]="{'padding-top':comic.title.length < 25 ? '9%' : '3%'}" class="nombre">{{returnNameComic()}}</div>
-    </div>
-  </a>
-</ng-template>
-
-<ng-template ngIf="{{comic._id}}">
-  <a [routerLink]="['/comics',comic._id]" *ngIf="comic.main_picture?.medium">
-    <div class="manga" style="background-image: url({{comic.main_picture.medium}});">
-      <div [ngStyle]="{'opacity': isNew() ? '1' : '0'}" class="nuevo">Nuevo</div>
-      <div [ngStyle]="{'padding-top':comic.title.length < 25 ? '9%' : '3%'}" class="nombre">{{returnNameComic()}}</div>
-    </div>
-  </a>
-</ng-template>
--->
-
-<ion-card *ngIf="comic._id">
+<ion-card *ngIf="comic._id" style="margin-left: auto; margin-right: auto;">
   <ion-img *ngIf="comic.main_picture !== undefined" [routerLink]="['/comics',comic._id]" alt="{{comic.title}}" src="{{comic.main_picture.medium}}" />
   <ion-card-header>
     <ion-card-subtitle [ngStyle]="{'opacity': isNew() ? '1' : '0'}" class="nuevo">Nuevo</ion-card-subtitle>
@@ -25,7 +6,7 @@
   </ion-card-header>
 </ion-card>
 
-<ion-card *ngIf="comic.id">
+<ion-card *ngIf="comic.id" style="margin-left: auto; margin-right: auto;">
   <ion-img *ngIf="comic.main_picture !== undefined" [routerLink]="['/comics',comic.id]" alt="{{comic.title}}" src="{{comic.main_picture.medium}}" />
   <ion-card-header>
     <ion-card-title>{{returnNameComic()}}</ion-card-title>
