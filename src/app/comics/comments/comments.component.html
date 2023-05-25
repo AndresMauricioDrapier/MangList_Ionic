@@ -1,7 +1,7 @@
-<ion-content>
+<ion-content style="height: 15em;">
   <ion-card>
-    <ion-card-header color="principal" class="ion-margin-top">
-      <ion-card-title>Comments:</ion-card-title>
+    <ion-card-header color="principal">
+      <ion-card-title>Comentarios:</ion-card-title>
     </ion-card-header>
 
     <ion-refresher #refresher slot="fixed" (ionRefresh)="loadComments(refresher)">
@@ -22,6 +22,7 @@
       </ion-item>
     </ion-list>
   </ion-card>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!haveComment">
     <ion-fab-button color="principal" (click)="addComment()">
       <ion-icon name="add"></ion-icon>
