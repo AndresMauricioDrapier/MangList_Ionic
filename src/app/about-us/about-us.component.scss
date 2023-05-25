@@ -236,12 +236,17 @@ ion-card-title{
 ion-card-content{
   text-align: justify;
   font-size: medium;
+
   address{
     ul{
       list-style: none;
       padding-left: 0;
       font-size: small;
     }
+  }
+
+  ion-button{
+    font-weight: bold;
   }
 }
 

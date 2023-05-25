@@ -8,12 +8,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import Swal from 'sweetalert2';
 import { Comic } from '../interfaces/comics';
 import { Genres } from '../interfaces/categories';
 import { ComicsService } from '../services/comics.service';
 import { UsersService } from 'src/app/users/services/users.service';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
 
 @Component({
@@ -60,7 +59,8 @@ export class ComicFormComponent implements OnInit {
     private readonly fb: NonNullableFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly comicService: ComicsService,
-    private readonly userService: UsersService
+    private readonly userService: UsersService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit(): void {
@@ -120,34 +120,44 @@ export class ComicFormComponent implements OnInit {
     this.newComic.mean = Number(this.meanControl.value);
     if (this.withID) {
       this.comicService.addComic(this.newComic, this.withID).subscribe({
-        next: () => {
-          Swal.fire({
-            title: 'Comic editado correctamente',
-            icon: 'success',
+        next: async () => {
+          const alert = await this.alertController.create({
+            header: '¡Comic editado correctamente!',
+            message: 'El comic ha sido editado correctamente.',
+            buttons: ['Aceptar'],
           });
+
+          await alert.present();
         },
-        error: (err) => {
-          Swal.fire({
-            title: 'Error al editar el comic',
-            text: err,
-            icon: 'error',
+        error: async (err) => {
+          const alert = await this.alertController.create({
+            header: '¡Error al editar el comic!',
+            message: 'El comic no ha podido editarse.',
+            buttons: ['Aceptar'],
           });
+
+          await alert.present();
         },
       });
     } else {
       this.comicService.addComic(this.newComic).subscribe({
-        next: () => {
-          Swal.fire({
-            title: 'Comic añadido correctamente',
-            icon: 'success',
+        next: async () => {
+          const alert = await this.alertController.create({
+            header: '¡Comic añadido correctamente!',
+            message: 'El comic ha sido añadido correctamente.',
+            buttons: ['Aceptar'],
           });
+
+          await alert.present();
         },
-        error: (err) => {
-          Swal.fire({
-            title: 'Error al añadir el comic',
-            text: err,
-            icon: 'error',
+        error: async (err) => {
+          const alert = await this.alertController.create({
+            header: '¡Error al añadir el comic!',
+            message: 'El comic no ha sido añadido.',
+            buttons: ['Aceptar'],
           });
+
+          await alert.present();
         },
       });
     }

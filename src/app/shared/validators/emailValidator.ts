@@ -1,7 +1,8 @@
-export function validateEmail(mail: string) {
-  let pattern = new RegExp(/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/);
-  if (pattern.test(mail)) {
+export function validateEmail(email: string) {
+  let validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+  if (validEmail.test(email)) {
     return true;
+  } else {
+    return false;
   }
-  return false;
 }
