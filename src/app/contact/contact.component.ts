@@ -18,10 +18,12 @@ import { Observable } from 'rxjs';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
-export class ContactComponent implements OnInit,CanDeactivateComponent {
+export class ContactComponent implements OnInit, CanDeactivateComponent {
   name = '';
   email = '';
   message = '';
+
+  exit = false;
 
   newMail: Mail = {
     from: 'info.manglist@gmail.com',
@@ -39,6 +41,7 @@ export class ContactComponent implements OnInit,CanDeactivateComponent {
   ngOnInit(): void {}
 
   sendMail(): void {
+    this.exit = true;
     this.newMail.subject = 'MangList: ' + this.name;
     this.newMail.message = 'Contacto: ' + this.email + '\n' + this.message;
 
@@ -64,6 +67,7 @@ export class ContactComponent implements OnInit,CanDeactivateComponent {
     });
   }
   canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    if (this.exit) return true;
     return new Promise<boolean>(async (resolve) => {
       const alert = await inject(AlertController).create({
         header: 'Confirmación',

@@ -26,6 +26,8 @@ export class AuthLoginComponent implements OnInit, CanDeactivateComponent{
     password: '',
   };
 
+  exit = false;
+
   passRecoveryForm!: FormGroup;
   emailRecoveryControl!: FormControl<string>;
   textRecoveryControl!: FormControl<string>;
@@ -42,6 +44,7 @@ export class AuthLoginComponent implements OnInit, CanDeactivateComponent{
     console.log('Formulario Login');
   }
   canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    if(this.exit) return true;
     return new Promise<boolean>(async (resolve) => {
       const alert = await inject(AlertController).create({
         header: 'Confirmación',
@@ -71,6 +74,7 @@ export class AuthLoginComponent implements OnInit, CanDeactivateComponent{
   }
 
   login(): void {
+    this.exit=true;
     this.authService.login(this.userInfo).subscribe({
       next: async () => {
         (
@@ -115,6 +119,7 @@ export class AuthLoginComponent implements OnInit, CanDeactivateComponent{
   }
 
   goRegister(): void {
+    this.exit = true;
     this.nav.navigateRoot(['auth/register']);
   }
 }

@@ -40,6 +40,7 @@ export class ComicFormComponent implements OnInit,CanDeactivateComponent {
   meanControl!: FormControl<number>;
 
   withID = '';
+  exit = false;
 
   newComic: Comic = {
     title: '',
@@ -65,6 +66,7 @@ export class ComicFormComponent implements OnInit,CanDeactivateComponent {
     private alertController: AlertController
   ) {}
   canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    if(this.exit) return true;
     return new Promise<boolean>(async (resolve) => {
       const alert = await this.alertController.create({
         header: 'Confirmación',
@@ -141,6 +143,7 @@ export class ComicFormComponent implements OnInit,CanDeactivateComponent {
   }
 
   addComic() {
+    this.exit = true;
     this.newComic.title = this.titleControl.value;
     this.newComic.synopsis = this.synopsisControl.value;
     this.newComic.genres = this.giveGenresArray();

@@ -36,7 +36,7 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button color="tertiary" expand="block" [routerLink]="['/auth/register']" [routerDirection]="'root'">
+          <ion-button color="tertiary" expand="block" (click)="goRegister()">
             <ion-icon name="document-text" slot="start"></ion-icon>
             Registrarse
           </ion-button>
