@@ -14,7 +14,7 @@ import { Mail } from 'src/app/shared/mail/interfaces/mail';
 import { MailService } from 'src/app/shared/mail/services/mail.service';
 import { Auth } from 'src/app/auth/interfaces/auth';
 import { UsersService } from 'src/app/users/services/users.service';
-// import { enviarPDFyCorreo } from '../../shared/downloadPDF';
+import { enviarPDFyCorreo } from '../../shared/downloadPDF';
 import { PaymentService } from '../services/payment.service';
 import { AlertController, IonicModule } from '@ionic/angular';
 
@@ -176,7 +176,8 @@ export class CartComponent implements OnInit {
           });
           await alert.present();
 
-          // enviarPDFyCorreo(this.newPayment, this.subscription);
+          enviarPDFyCorreo(this.newPayment, this.subscription);
+
           this.router.navigate(['/']);
         } else {
           const alert = await this.alertController.create({

@@ -21,6 +21,7 @@ export class AboutUsComponent implements CanDeactivateComponent {
     to: '',
     message: '¡Gracias por subscribirte a nuestro newsletter!',
   };
+  exit = false;
 
   public alertButtons = [
     {
@@ -45,6 +46,7 @@ export class AboutUsComponent implements CanDeactivateComponent {
   ) {}
 
   canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    if(this.exit) return true;
     return new Promise<boolean>(async (resolve) => {
       const alert = await inject(AlertController).create({
         header: 'Confirmación',
@@ -74,6 +76,7 @@ export class AboutUsComponent implements CanDeactivateComponent {
   }
 
   async addToNewsletter(email: any): Promise<void> {
+    this.exit=true;
     if (email.detail.role) {
       console.log(validateEmail(email.detail.data.values[0]))
       if (validateEmail(email.detail.data.values[0])) {

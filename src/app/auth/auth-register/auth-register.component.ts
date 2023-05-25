@@ -1,17 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  Router,
-  RouterModule
-} from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { Auth, AuthLogin } from '../interfaces/auth';
 import { AuthService } from '../services/auth.service';
-import {
-  AlertController,
-  IonicModule,
-  ToastController,
-} from '@ionic/angular';
+import { AlertController, IonicModule, ToastController } from '@ionic/angular';
 import { MailService } from 'src/app/shared/mail/services/mail.service';
 import { Mail } from 'src/app/shared/mail/interfaces/mail';
 import { MatchValidator } from 'src/app/shared/validators/match.validator';
@@ -33,12 +26,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./auth-register.component.scss'],
 })
 export class AuthRegisterComponent implements OnInit, CanDeactivateComponent {
-  userForm!: FormGroup;
-  nameControl!: FormControl<string>;
-  emailControl!: FormControl<string>;
-  passwordControl!: FormControl<string>;
-  password2Control!: FormControl<string>;
-  imageControl!: FormControl<string>;
   exit = false;
 
   imageChangedEvent: any = '';
@@ -76,6 +63,7 @@ export class AuthRegisterComponent implements OnInit, CanDeactivateComponent {
   ngOnInit(): void {}
 
   canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    if (this.exit || this.newUser) return true;
     return new Promise<boolean>(async (resolve) => {
       const alert = await inject(AlertController).create({
         header: 'Confirmación',
@@ -121,6 +109,7 @@ export class AuthRegisterComponent implements OnInit, CanDeactivateComponent {
         this.userInfo.email = this.newUser.email;
         this.authService.login(this.userInfo).subscribe({
           next: () => {
+            this.exit = true;
             this.router.navigate(['/']);
           },
           error: (error) => {
@@ -152,8 +141,12 @@ export class AuthRegisterComponent implements OnInit, CanDeactivateComponent {
   }
 
   resetForm() {
-    this.userForm.reset();
-    this.newUser.avatar = '';
+    this.newUser = {
+      name: '',
+      email: '',
+      avatar: '',
+      password: '',
+    };
   }
   async takePhoto() {
     const photo = await Camera.getPhoto({
