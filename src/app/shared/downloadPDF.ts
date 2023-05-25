@@ -60,7 +60,7 @@ export async function enviarPDFyCorreo(payment:any, subscription:any) {
           },
       },
   };
-  pdfMake.createPdf(documentDefinition).download();
+  pdfMake.createPdf(documentDefinition).open();
 }
 
 async function getImageContent(imageUrl: string): Promise<string> {
