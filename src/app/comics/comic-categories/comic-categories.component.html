@@ -8,54 +8,49 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
 
-  <ion-list>
-    <ion-item>
-      <ion-select (ionChange)="handleChangeGenre($event)" interface="popover" placeholder="Seleciona el genero">
-        <ng-container *ngFor="let g of genres">
-          <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
-        </ng-container>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-select (ionChange)="handleChangeGenre($event)" interface="popover" placeholder="Seleciona el genero">
+          <ng-container *ngFor="let g of genres">
+            <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
 
-  <ion-list>
-    <ion-item>
-      <ion-select (ionChange)="handleChangeDate($event)" interface="popover" placeholder="Seleciona la fecha de inicio">
-        <ng-container *ngFor="let g of startDate">
-          <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
-        </ng-container>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+      <ion-item>
+        <ion-select (ionChange)="handleChangeDate($event)" interface="popover"
+          placeholder="Seleciona la fecha de inicio">
+          <ng-container *ngFor="let g of startDate">
+            <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
 
-  <ion-list>
-    <ion-item>
-      <ion-select (ionChange)="handleChangeStatus($event)" interface="popover" placeholder="Seleciona el estado">
-        <ng-container *ngFor="let g of status">
-          <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
-        </ng-container>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list>
+      <ion-item>
+        <ion-select (ionChange)="handleChangeStatus($event)" interface="popover" placeholder="Seleciona el estado">
+          <ng-container *ngFor="let g of status">
+            <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
 
-    <ion-item>
-      <ion-select (ionChange)="handleChangeOrder($event)" interface="popover" placeholder="Seleciona el orden">
-        <ng-container *ngFor="let g of order">
-          <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
-        </ng-container>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+      <ion-item>
+        <ion-select (ionChange)="handleChangeOrder($event)" interface="popover" placeholder="Seleciona el orden">
+          <ng-container *ngFor="let g of order">
+            <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-  <!-- /Div Filtro -->
-
-  <ion-list id="contenido">
-    <!-- {{comics |json}} -->
-    <ion-item *ngFor="let comic of comics | comicsFilterCategory: genreFilter:statusFilter:startDateFilter:orderFilter">
-      <ml-comic-card [comic]="comic.node"></ml-comic-card>
-    </ion-item>
-  </ion-list>
+    <ion-list id="contenido">
+      <ion-item
+        *ngFor="let comic of comics | comicsFilterCategory: genreFilter:statusFilter:startDateFilter:orderFilter">
+        <ml-comic-card [comic]="comic.node" style="width: 100%;"></ml-comic-card>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>
 <!-- /Contendor principal -->

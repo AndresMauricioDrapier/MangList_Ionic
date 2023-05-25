@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-card *ngIf="comic">
-    <img alt="{{comic.title}}" src="{{comic.main_picture.medium}}" />
+    <ion-img alt="{{comic.title}}" src="{{comic.main_picture.medium}}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Puntuación: {{comic.mean}}</ion-card-subtitle>
     </ion-card-header>
@@ -24,16 +24,12 @@
         <ion-col>Categoría:</ion-col>
         <ion-col *ngFor="let generos of comic.genres">{{generos.name}}</ion-col>
       </ion-row>
-    </ion-grid>
 
-    <ion-grid>
       <ion-row>
         <ion-col>Capitulos:</ion-col>
         <ion-col>{{comic.num_volumes}}</ion-col>
       </ion-row>
-    </ion-grid>
 
-    <ion-grid>
       <ion-row>
         <ion-col>Año de serialización:</ion-col>
         <ion-col>{{comic.start_date}}</ion-col>
