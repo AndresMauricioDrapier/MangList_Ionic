@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
   isMe!: boolean;
   haveRoleToAddComic!: boolean;
 
-  newAvatar: string = "";
+  newAvatar: string = '';
   isModalAvatarOpen = false;
 
   user: Auth = {
@@ -150,13 +150,6 @@ export class UsersComponent implements OnInit {
         });
         await alert.present();
       }
-    } else {
-      const alert = await this.alertController.create({
-        header: '¡Usuario descartado!',
-        message: 'El perfil se ha descartado.',
-        buttons: ['Aceptar'],
-      });
-      await alert.present();
     }
   }
 
@@ -198,13 +191,6 @@ export class UsersComponent implements OnInit {
         });
         await alert.present();
       }
-    } else {
-      const alert = await this.alertController.create({
-        header: '¡Contraseña incorrecta!',
-        message: 'La contraseña no es correcta.',
-        buttons: ['Aceptar'],
-      });
-      await alert.present();
     }
   }
 

@@ -12,6 +12,7 @@ import { StarRatingComponent } from './star-rating/star-rating.component';
 import { CommentsService } from '../services/comments.service';
 import { AlertController, IonicModule, IonRefresher } from '@ionic/angular';
 import { UsersService } from 'src/app/users/services/users.service';
+import { Auth } from 'src/app/auth/interfaces/auth';
 
 @Component({
   selector: 'ml-comments',
@@ -22,6 +23,7 @@ import { UsersService } from 'src/app/users/services/users.service';
 })
 export class CommentsComponent implements OnInit, OnChanges {
   @Input() comicId!: string;
+  @Input() user!: Auth;
   @Input() comment!: Commentary;
 
   comments!: Commentary[];
@@ -104,6 +106,8 @@ export class CommentsComponent implements OnInit, OnChanges {
     if (result.role === 'ok') {
       this.newComment.stars = +result.data.values.stars;
       this.newComment.text = result.data.values.comment;
+      this.newComment.comicId = this.comicId;
+      this.newComment.user = this.user;
 
       this.commentsServices
         .addComment(this.newComment)
