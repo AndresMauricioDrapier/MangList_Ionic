@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MangList-Ionic</string>
-    <string name="title_activity_main">MangList-Ionic</string>
+    <string name="app_name">MangList</string>
+    <string name="title_activity_main">MangList</string>
     <string name="package_name">io.ionic.manglist</string>
     <string name="custom_url_scheme">io.ionic.manglist</string>
 </resources>

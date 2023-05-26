@@ -3,7 +3,6 @@ import { Platform } from "@ionic/angular";
 import { Filesystem } from '@capacitor/filesystem';
 import { FilesystemDirectory } from "@capacitor/filesystem/dist/esm/definitions";
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
-
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
@@ -77,7 +76,7 @@ function downloadPdf(pdf:pdfMake.TCreatedPdf){
         let path = 'pdf/SubscripcionMangList.pdf';
         const result = await Filesystem.writeFile({
           path:path,
-          data:data,
+          data,
           directory:FilesystemDirectory.Documents,
           recursive:true
         });
@@ -86,6 +85,8 @@ function downloadPdf(pdf:pdfMake.TCreatedPdf){
         console.error('Error al descargar el pdf',e);
       }
     })
+  }else{
+    pdf.download();
   }
 }
 
