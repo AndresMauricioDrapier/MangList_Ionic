@@ -7,12 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-refresher #refresher slot="fixed" (ionRefresh)="reloadProducts(refresher)">
-  <ion-refresher-content>
-  </ion-refresher-content>
-</ion-refresher>
-
 <ion-content #pageTop>
+
+  <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadProducts(refresher)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-card>
     <ion-grid>
 
