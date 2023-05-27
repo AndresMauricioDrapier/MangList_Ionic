@@ -1,6 +1,13 @@
 ion-card {
   border-radius: 10px;
 
+  ion-img{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+  }
+
   form {
     label {
       color: white !important;
