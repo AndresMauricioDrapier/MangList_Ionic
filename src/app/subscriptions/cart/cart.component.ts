@@ -17,6 +17,7 @@ import { UsersService } from 'src/app/users/services/users.service';
 import { enviarPDFyCorreo } from '../../shared/downloadPDF';
 import { PaymentService } from '../services/payment.service';
 import { AlertController, IonicModule } from '@ionic/angular';
+import { PdfMakeService } from 'src/app/shared/pdf/pdf-make.service';
 
 @Component({
   selector: 'ml-cart',
@@ -82,6 +83,7 @@ export class CartComponent implements OnInit {
     method: 'Visa',
     amount: 0,
     date: '',
+    name: '',
   };
 
   newMail: Mail = {
@@ -99,7 +101,8 @@ export class CartComponent implements OnInit {
     private readonly mailServices: MailService,
     private readonly userService: UsersService,
     private readonly paymentService: PaymentService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private pdfService: PdfMakeService
   ) {}
 
   ngOnInit(): void {
@@ -165,6 +168,7 @@ export class CartComponent implements OnInit {
     this.newPayment.type = this.subscription!.type;
     this.newPayment.amount = this.subscription!.price;
     this.newPayment.date = new Date().toLocaleDateString();
+    this.newPayment.name = this.user.name;
 
     this.paymentService.paySubscription(this.newPayment).subscribe({
       next: async () => {
@@ -175,10 +179,6 @@ export class CartComponent implements OnInit {
             buttons: ['Aceptar'],
           });
           await alert.present();
-
-          enviarPDFyCorreo(this.newPayment, this.subscription).then(() =>
-            this.router.navigate(['/'])
-          );
         } else {
           const alert = await this.alertController.create({
             header: '¡Gracias por la compra!',
@@ -186,7 +186,7 @@ export class CartComponent implements OnInit {
             buttons: ['Aceptar'],
           });
           await alert.present();
-
+          this.pdfService.generatePdf(this.newPayment, this.subscription);
           this.router.navigate(['/']);
         }
       },

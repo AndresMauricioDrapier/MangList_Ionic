@@ -6,6 +6,7 @@ export interface Payment {
   method: string,
   amount:number,
   date: string,
+  name?:string
 }
 
 export interface PaymentResponse {
