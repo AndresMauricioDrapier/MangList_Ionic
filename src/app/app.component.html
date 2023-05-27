@@ -18,8 +18,8 @@
         <ion-list>
           <ion-menu-toggle *ngIf="!loggedIn" auto-hide="false">
             <ion-item (click)="logout()" lines="none" detail="false">
-              <ion-icon slot="start" name="exit"></ion-icon>
-              <ion-label>Login</ion-label>
+              <ion-icon slot="start" name="log-in"></ion-icon>
+              <ion-label>Iniciar sesión</ion-label>
             </ion-item>
           </ion-menu-toggle>
 
@@ -33,7 +33,7 @@
           <ion-menu-toggle *ngIf="loggedIn" auto-hide="false">
             <ion-item (click)="logout()" lines="none" detail="false">
               <ion-icon slot="start" name="exit"></ion-icon>
-              <ion-label>Logout</ion-label>
+              <ion-label>Cerrar sesión</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

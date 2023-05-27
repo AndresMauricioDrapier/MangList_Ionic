@@ -1,4 +1,8 @@
-ion-img{
+ion-card{
+  border-radius: 10px;
+  padding: 5%;
+
+  ion-img{
   width: 40%;
   margin-right: auto;
   margin-left: auto;
@@ -21,5 +25,8 @@ form{
   }
   ion-button{
     width: 99%;
+    font-weight: bold;
   }
+}
+
 }

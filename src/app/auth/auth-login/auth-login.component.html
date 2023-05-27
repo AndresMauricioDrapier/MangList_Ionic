@@ -7,57 +7,56 @@
   </ion-toolbar>
 </ion-header>
 
-<div class="text-center pulse">
-  <ion-img src="assets/logo_MangList.png" style="width: 50px; box-shadow: none" alt="logo"></ion-img>
-  <h4 class="mb-5 pb-1" style="color: #a309cd; font-size: 3em; font-weight: bold;">MangList</h4>
-</div>
+<ion-content>
+  <ion-card>
+    <ion-img src="assets/logo_MangList.png" style="width: 50px; box-shadow: none" alt="logo"></ion-img>
+    <h4 class="title">MangList</h4>
 
-<ion-content class="ion-padding">
-  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <form (ngSubmit)="login()" #loginForm="ngForm">
 
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" name="email" required [(ngModel)]="userInfo.email"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" name="password"
-          required [(ngModel)]="userInfo.password"></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-button type="submit" color="primary" expand="block" [disabled]="loginForm.invalid">
-            <ion-icon name="log-in" slot="start"></ion-icon>
-            Iniciar Sesion
-          </ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button color="tertiary" expand="block" (click)="goRegister()">
-            <ion-icon name="document-text" slot="start"></ion-icon>
-            Registrarse
-          </ion-button>
-          <ion-button id="open-modal" expand="block">¿Has olvidado tu contraseña?</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
-  <ion-col size-lg="6" class="ion-align-items-center gradient-custom-2">
-    <ion-card-content class="text-white px-3 py-4 p-md-5 mx-md-4">
-      <h4 class="mb-4">Un objetivo sencillo: Simplificar la compra de mangas.</h4>
-      <p class="small mb-0">
-        Leer manga actualmente es una de las modas más comunes en los jóvenes y no tan jóvenes. Comprar manga
-        puede ser muy tedioso, ya que vienen de Japón y no siempre hay stock en tiendas físicas. Nuestro
-        objetivo es poder llegar a esas personas que se han quedado sin stock de su manga favorito o que
-        simplemente quieren coleccionar una saga que no se distribuye en España. Como apasionado de este mundo
-        sé lo que significa querer comprar una saga y no poder, por lo tanto, hemos abierto esta tienda con el
-        objetivo de poder cumplir esos deseos y de promover el mundo del manga, el cual es apasionante.
-      </p>
-    </ion-card-content>
-  </ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" name="email" required [(ngModel)]="userInfo.email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" name="password" required [(ngModel)]="userInfo.password"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="principal" expand="block" [disabled]="loginForm.invalid">
+              <ion-icon name="log-in" slot="start"></ion-icon>
+              Iniciar Sesion
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="tertiary" expand="block" (click)="goRegister()">
+              <ion-icon name="document-text" slot="start"></ion-icon>
+              Registrarse
+            </ion-button>
+            <ion-button id="open-modal" expand="block">¿Has olvidado tu contraseña?</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <ion-col size-lg="6" class="ion-align-items-center gradient-custom-2">
+      <ion-card-content class="text-white px-3 py-4 p-md-5 mx-md-4">
+        <h4 class="mb-4">Un objetivo sencillo: Simplificar la lectura de mangas.</h4>
+        <p class="small mb-0">
+          Leer manga actualmente es una de las modas más comunes en los jóvenes y no tan jóvenes. Comprar manga
+          puede ser muy tedioso, ya que vienen de Japón y no siempre hay stock en tiendas físicas. Nuestro
+          objetivo es poder llegar a esas personas que se han quedado sin stock de su manga favorito o que
+          simplemente quieren coleccionar una saga que no se distribuye en España. Como apasionado de este mundo
+          sé lo que significa querer comprar una saga y no poder, por lo tanto, hemos abierto esta tienda con el
+          objetivo de poder cumplir esos deseos y de promover el mundo del manga, el cual es apasionante.
+        </p>
+      </ion-card-content>
+    </ion-col>
+  </ion-card>
 
 
   <ion-modal #modal trigger="open-modal">
