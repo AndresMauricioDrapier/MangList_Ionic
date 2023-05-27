@@ -15,9 +15,9 @@
   <form (ngSubmit)="sendMail()" #contactForm="ngForm">
     <ion-input color="principal" name="name" [(ngModel)]="name" label="Nombre" #nameModel="ngModel" label-placement="floating" fill="outline"
       placeholder="Nombre Apellido"></ion-input>
-    <ion-input color="principal" name="email" label="Email" label-placement="floating" fill="outline" placeholder="ejemplo@gmail.com"
+    <ion-input color="principal" name="email" [(ngModel)]="email" label="Email" label-placement="floating" fill="outline" placeholder="ejemplo@gmail.com"
       required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
-    <ion-textarea color="principal" name="message" label="Mensaje" labelPlacement="floating" fill="outline"
+    <ion-textarea color="principal" name="message" [(ngModel)]="message" label="Mensaje" labelPlacement="floating" fill="outline"
       placeholder="Escribe aqui tu mensaje ..."></ion-textarea>
     <ion-button color="principal" type="submit" [disabled]="contactForm.invalid">Enviar</ion-button>
   </form>
