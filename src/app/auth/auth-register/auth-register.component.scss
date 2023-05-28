@@ -1,28 +1,39 @@
-form{
-  label{
+ion-card {
+  border-radius: 10px;
+
+  ion-img{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+  }
+
+  form {
+    label {
+      color: white !important;
+    }
+  }
+  .form-control {
+    background-color: #060d17 !important;
     color: white !important;
   }
-}
-.form-control {
-  background-color: #060d17 !important;
-  color: white !important;
-}
-.previewAvatar{
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-}
-image-cropper{
-  max-height: 80%;
-  --cropper-outline-color:rgba(0,0,0,0.642);
-  --cropper-overlay-color:var(--ion-background-color);
-}
+  .previewAvatar {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+  }
+  image-cropper {
+    max-height: 80%;
+    --cropper-outline-color: rgba(0, 0, 0, 0.642);
+    --cropper-overlay-color: var(--ion-background-color);
+  }
 
-.container {
-  background-color: #060d17 !important;
-}
+  .container {
+    background-color: #060d17 !important;
+  }
 
-.contenedorFormulario{
-  background-color: #23282E !important;
-  border-radius: 10px;
+  .contenedorFormulario {
+    background-color: #23282e !important;
+    border-radius: 10px;
+  }
 }
