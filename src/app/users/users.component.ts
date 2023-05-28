@@ -251,6 +251,19 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  async deleteUser(userDelete:any){
+    if(userDelete.detail.role){
+      this.userService.deleteUser();
+    }else{
+      const alert = await this.alertController.create({
+        header: '¡Cancelado!',
+        message: 'El usuario no se ha borrado.',
+        buttons: ['Aceptar'],
+      });
+      await alert.present();
+    }
+  }
+
   goToAddComic(): void {
     this.router.navigate(['/comics/add']);
   }

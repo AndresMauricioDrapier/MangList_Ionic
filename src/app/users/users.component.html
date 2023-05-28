@@ -55,12 +55,18 @@
       <ion-fab-button *ngIf="haveRoleToAddComic" color="principal" (click)="goToAddComic()">
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-fab-button>
+      <ion-fab-button color="danger" id="deleteUserAlert">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 
 
   <ion-alert color="principal" trigger="presentAlertProfile" header="Introduce los nuevos datos:"
     [buttons]="alertButtons" [inputs]="alertProfileInputs" (didDismiss)="saveUser($event)"></ion-alert>
+
+  <ion-alert color="principal" trigger="deleteUserAlert" header="¿Seguro que quieres borrar el usuario?"
+    [buttons]="alertButtons" (didDismiss)="deleteUser($event)"></ion-alert>
 
   <!-- <ion-alert color="principal" trigger="presentAlertAvatar" header="Introduce el nuevo avatar:" [buttons]="alertButtons"
     [inputs]="alertAvatarInputs" (didDismiss)="saveAvatar($event)">

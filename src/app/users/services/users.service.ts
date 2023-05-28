@@ -117,6 +117,9 @@ export class UsersService {
       idComic,
     });
   }
+  deleteUser(): Observable<void> {
+    return this.http.delete<void>(`${this.USERS_URL}/${this.userId}`);
+  }
 
   passwordRecovery(email: string): Observable<void> {
     return this.http.put<void>('users/password-recovery', {
