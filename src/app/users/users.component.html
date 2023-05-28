@@ -23,6 +23,14 @@
 
   <ion-card>
     <ion-item>
+      <h3>Seguir leyendo:</h3>
+    </ion-item>
+    <ion-item class="comicsContainter"><ml-comic-card [comic]="lastComic"></ml-comic-card></ion-item>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
       <h3>Comics favoritos:</h3>
     </ion-item>
     <ion-item *ngFor="let comic of comics" class="comicsContainter">
@@ -68,7 +76,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-avatar style="margin-bottom: 1em;" *ngIf="newAvatar !== ''" >
+        <ion-avatar style="margin-bottom: 1em;" *ngIf="newAvatar !== ''">
           <ion-img src="{{newAvatar}}" alt="Preview imagen perfil"></ion-img>
         </ion-avatar>
         <ion-item style="margin-bottom: 1em;">
@@ -82,7 +90,8 @@
             Gallery
           </ion-button>
         </ion-item>
-        <ion-button style="font-weight: bold;" type="button" color="principal" (click)="saveAvatar()">Guardar cambios</ion-button>
+        <ion-button style="font-weight: bold;" type="button" color="principal" (click)="saveAvatar()">Guardar
+          cambios</ion-button>
       </ion-content>
     </ng-template>
   </ion-modal>
