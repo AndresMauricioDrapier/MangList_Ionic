@@ -7,6 +7,7 @@ export interface Auth {
     token?:string;
     role?:string;
     favorites?:number[];
+    lastComicRead?:string;
 }
 
 export interface AuthLogin {

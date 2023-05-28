@@ -28,6 +28,14 @@ export class UsersComponent implements OnInit {
   newAvatar: string = '';
   isModalAvatarOpen = false;
 
+  lastComic:Comic={
+    title:"",
+    main_picture:{
+      medium:"",
+      large:""
+    }
+  };
+
   user: Auth = {
     email: '',
     avatar: '',
@@ -95,6 +103,7 @@ export class UsersComponent implements OnInit {
   }
 
   makeAtInit(): void {
+    console.log(this.user);
     this.userService.hasRoleToAdd().subscribe((bool) => {
       this.haveRoleToAddComic = bool;
     });
@@ -109,6 +118,16 @@ export class UsersComponent implements OnInit {
           });
         })
       : null;
+
+      this.comicService.getIdComic(this.user.lastComicRead!).subscribe({
+        next: (comic) => {
+            this.lastComic = comic;
+            console.log(this.lastComic);
+        },
+        error: (err) => {
+            console.error(err);
+        },
+    });
   }
 
   async saveUser(profile: any): Promise<void> {

@@ -13,7 +13,13 @@ import { AlertController, IonicModule } from '@ionic/angular';
 @Component({
   selector: 'ml-comic-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, CommentsComponent, IonicModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    CommentsComponent,
+    IonicModule,
+  ],
   templateUrl: './comic-details.component.html',
   styleUrls: ['./comic-details.component.scss'],
 })
@@ -93,27 +99,29 @@ export class ComicDetailsComponent implements OnInit {
   }
 
   deleteFronFavorites(): void {
-    this.usersService.deleteFavorite(this.comicId, this.user._id || 0).subscribe({
-      next: async () => {
-        this.inFav = false;
-        const alert = await this.alertController.create({
-          header: '¡Comic eliminado de favoritos!',
-          message: 'El comic ha sido eliminado de favoritos correctamente.',
-          buttons: ['Aceptar'],
-        });
+    this.usersService
+      .deleteFavorite(this.comicId, this.user._id || 0)
+      .subscribe({
+        next: async () => {
+          this.inFav = false;
+          const alert = await this.alertController.create({
+            header: '¡Comic eliminado de favoritos!',
+            message: 'El comic ha sido eliminado de favoritos correctamente.',
+            buttons: ['Aceptar'],
+          });
 
-        await alert.present();
-      },
-      error: async () => {
-        const alert = await this.alertController.create({
-          header: '¡Oops...!',
-          message: 'Comic no eliminado de favoritos.',
-          buttons: ['Aceptar'],
-        });
+          await alert.present();
+        },
+        error: async () => {
+          const alert = await this.alertController.create({
+            header: '¡Oops...!',
+            message: 'Comic no eliminado de favoritos.',
+            buttons: ['Aceptar'],
+          });
 
-        await alert.present();
-      },
-    });
+          await alert.present();
+        },
+      });
   }
 
   containsFavorite(): void {
@@ -134,6 +142,16 @@ export class ComicDetailsComponent implements OnInit {
     } else {
       this.router.navigate(['/auth/login']);
     }
+  }
+  savelastComicRead() {
+    this.usersService
+      .saveLastComicRead(this.user._id || 0, this.comicId)
+      .subscribe({
+        next: () => {
+          this.goToReadingPage();
+        },
+        error: (e) => console.error(e),
+      });
   }
 
   formatDate(fecha: string): string {

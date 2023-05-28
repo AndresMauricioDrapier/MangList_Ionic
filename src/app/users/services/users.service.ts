@@ -1,153 +1,149 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, catchError, map, throwError } from "rxjs";
-import { Auth } from "src/app/auth/interfaces/auth";
-import { AuthResponse } from "src/app/auth/interfaces/responses";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { Auth } from 'src/app/auth/interfaces/auth';
+import { AuthResponse } from 'src/app/auth/interfaces/responses';
 
 @Injectable({
-    providedIn: "root",
+  providedIn: 'root',
 })
 export class UsersService {
-    private readonly USERS_URL = "users";
-    constructor(private readonly http: HttpClient) {}
+  private readonly USERS_URL = 'users';
+  constructor(private readonly http: HttpClient) {}
 
-    userId = localStorage.getItem("user-id") || "";
+  userId = localStorage.getItem('user-id') || '';
 
-    // getUser(id: string): Observable<Auth> {
-    //     return this.http.get<AuthResponse>(`${this.USERS_URL}/${id}`).pipe(
-    //         map((r) => {
-    //             return r.result;
-    //         }),
-    //         catchError((resp: HttpErrorResponse) =>
-    //             throwError(
-    //                 () =>
-    //                     `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
-    //             )
-    //         )
-    //     );
-    // }
+  // getUser(id: string): Observable<Auth> {
+  //     return this.http.get<AuthResponse>(`${this.USERS_URL}/${id}`).pipe(
+  //         map((r) => {
+  //             return r.result;
+  //         }),
+  //         catchError((resp: HttpErrorResponse) =>
+  //             throwError(
+  //                 () =>
+  //                     `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
+  //             )
+  //         )
+  //     );
+  // }
 
-    getUser(id: string, me?: boolean): Observable<Auth> {
-        if (me) {
-            this.userId = localStorage.getItem("user-id") || "";
-            return this.http
-                .get<AuthResponse>(`${this.USERS_URL}/${this.userId}`)
-                .pipe(
-                    map((r) => {
-                        return r.result;
-                    }),
-                    catchError((resp: HttpErrorResponse) =>
-                        throwError(
-                            () =>
-                                `Error al coger tu usuario desde me. Estado: ${resp.status}. Mensaje: ${resp.message}`
-                        )
-                    )
-                );
-        } else {
-            return this.http.get<AuthResponse>(`${this.USERS_URL}/${id}`).pipe(
-                map((r) => r.result),
-                catchError((resp: HttpErrorResponse) =>
-                    throwError(
-                        () =>
-                            `Error al coger tu usuario desde id. Estado: ${resp.status}. Mensaje: ${resp.message}`
-                    )
-                )
-            );
-        }
-    }
-
-    // getUserImage(imageName: string): Observable<string> {
-    //     return this.http
-    //         .get<string>(`${this.USERS_URL}/images/${imageName}`)
-    //         .pipe(
-    //             map((r) => {
-    //                 return r;
-    //             }),
-    //             catchError((resp: HttpErrorResponse) =>
-    //                 throwError(
-    //                     () =>
-    //                         `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
-    //                 )
-    //             )
-    //         );
-    // }
-
-    saveProfile(name: string, email: string): Observable<void> {
-        return this.http.put<void>(this.USERS_URL + "/user/" + this.userId, {
-            name,
-            email,
-        });
-    }
-
-    saveAvatar(
-        avatar: string,
-        name: string,
-        avatarAntigua: string
-    ): Observable<string> {
-        return this.http.put<string>(
-            this.USERS_URL + "/avatar/" + this.userId,
-            {
-                avatar,
-                name,
-                avatarAntigua,
-            }
+  getUser(id: string, me?: boolean): Observable<Auth> {
+    if (me) {
+      this.userId = localStorage.getItem('user-id') || '';
+      return this.http
+        .get<AuthResponse>(`${this.USERS_URL}/${this.userId}`)
+        .pipe(
+          map((r) => {
+            return r.result;
+          }),
+          catchError((resp: HttpErrorResponse) =>
+            throwError(
+              () =>
+                `Error al coger tu usuario desde me. Estado: ${resp.status}. Mensaje: ${resp.message}`
+            )
+          )
         );
+    } else {
+      return this.http.get<AuthResponse>(`${this.USERS_URL}/${id}`).pipe(
+        map((r) => r.result),
+        catchError((resp: HttpErrorResponse) =>
+          throwError(
+            () =>
+              `Error al coger tu usuario desde id. Estado: ${resp.status}. Mensaje: ${resp.message}`
+          )
+        )
+      );
     }
+  }
 
-    savePassword(
-        firstPassword: string,
-        secondPassword: string
-    ): Observable<void> {
-        return this.http.put<void>(
-            this.USERS_URL + "/password/" + this.userId,
-            {
-                firstPassword,
-                secondPassword,
-            }
-        );
-    }
+  // getUserImage(imageName: string): Observable<string> {
+  //     return this.http
+  //         .get<string>(`${this.USERS_URL}/images/${imageName}`)
+  //         .pipe(
+  //             map((r) => {
+  //                 return r;
+  //             }),
+  //             catchError((resp: HttpErrorResponse) =>
+  //                 throwError(
+  //                     () =>
+  //                         `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
+  //                 )
+  //             )
+  //         );
+  // }
 
-    addFavorites(idComic: string, idUser: number): Observable<void> {
-        return this.http.put<void>(this.USERS_URL + "/favorites/" + idUser, {
-            idComic,
-        });
-    }
+  saveProfile(name: string, email: string): Observable<void> {
+    return this.http.put<void>(this.USERS_URL + '/user/' + this.userId, {
+      name,
+      email,
+    });
+  }
 
-    deleteFavorite(idComic: string, idUser: number): Observable<void> {
-        return this.http.put<void>(
-            this.USERS_URL + "/favorites/delete/" + idUser,
-            {
-                idComic,
-            }
-        );
-    }
+  saveAvatar(
+    avatar: string,
+    name: string,
+    avatarAntigua: string
+  ): Observable<string> {
+    return this.http.put<string>(this.USERS_URL + '/avatar/' + this.userId, {
+      avatar,
+      name,
+      avatarAntigua,
+    });
+  }
 
-    passwordRecovery(email: string): Observable<void> {
-        return this.http.put<void>("users/password-recovery", {
-            email: email,
-        });
-    }
+  savePassword(
+    firstPassword: string,
+    secondPassword: string
+  ): Observable<void> {
+    return this.http.put<void>(this.USERS_URL + '/password/' + this.userId, {
+      firstPassword,
+      secondPassword,
+    });
+  }
+  saveLastComicRead(idUser: number, lastComicRead: string): Observable<void> {
+    return this.http.put<void>(this.USERS_URL + '/lastComicRead/' + idUser, {
+      lastComicRead,
+    });
+  }
 
-    isLogged(): boolean {
-        return localStorage.getItem("auth-token") ? true : false;
-    }
+  addFavorites(idComic: string, idUser: number): Observable<void> {
+    return this.http.put<void>(this.USERS_URL + '/favorites/' + idUser, {
+      idComic,
+    });
+  }
 
-    hasRoleToRead(): boolean {
-        this.getUser(this.userId).subscribe((user) => {
-            if (user.role == "admin" || user.role == "subscribed") {
-                return true;
-            }
-            return false;
-        });
-        return false;
-    }
+  deleteFavorite(idComic: string, idUser: number): Observable<void> {
+    return this.http.put<void>(this.USERS_URL + '/favorites/delete/' + idUser, {
+      idComic,
+    });
+  }
 
-    hasRoleToAdd(): Observable<boolean> {
-        return new Observable<boolean>((observer) => {
-            this.getUser(this.userId).subscribe((user) => {
-                observer.next(user.role === "admin");
-                observer.complete();
-            });
-        });
-    }
+  passwordRecovery(email: string): Observable<void> {
+    return this.http.put<void>('users/password-recovery', {
+      email: email,
+    });
+  }
+
+  isLogged(): boolean {
+    return localStorage.getItem('auth-token') ? true : false;
+  }
+
+  hasRoleToRead(): boolean {
+    this.getUser(this.userId).subscribe((user) => {
+      if (user.role == 'admin' || user.role == 'subscribed') {
+        return true;
+      }
+      return false;
+    });
+    return false;
+  }
+
+  hasRoleToAdd(): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      this.getUser(this.userId).subscribe((user) => {
+        observer.next(user.role === 'admin');
+        observer.complete();
+      });
+    });
+  }
 }

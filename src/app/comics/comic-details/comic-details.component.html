@@ -39,7 +39,7 @@
     <ion-item>
       <ion-button color="principal" (click)="addToFavorites()" *ngIf="!inFav">Añadir a favoritos</ion-button>
       <ion-button color="principal" (click)="deleteFronFavorites()" *ngIf="inFav">Quitar de favoritos</ion-button>
-      <ion-button color="principal" (click)="goToReadingPage()">Leer capitulos</ion-button>
+      <ion-button color="principal" (click)="savelastComicRead()">Leer capitulos</ion-button>
       <ion-button color="principal" (click)="goToEditComic()" *ngIf="haveRoleToEditComic">Editar comic</ion-button>
     </ion-item>
   </ion-card>
