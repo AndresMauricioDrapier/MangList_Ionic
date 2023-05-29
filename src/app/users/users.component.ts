@@ -6,11 +6,12 @@ import { Comic } from '../comics/interfaces/comics';
 import { Auth } from '../auth/interfaces/auth';
 import { UsersService } from './services/users.service';
 import { ComicsService } from '../comics/services/comics.service';
-import { AlertController, IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { validateEmail } from '../shared/validators/emailValidator';
 import { validatePassword } from '../shared/validators/passwordValidator';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'ml-users',
@@ -28,12 +29,12 @@ export class UsersComponent implements OnInit {
   newAvatar: string = '';
   isModalAvatarOpen = false;
 
-  lastComic:Comic={
-    title:"",
-    main_picture:{
-      medium:"",
-      large:""
-    }
+  lastComic: Comic = {
+    title: '',
+    main_picture: {
+      medium: '',
+      large: '',
+    },
   };
 
   user: Auth = {
@@ -84,6 +85,8 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UsersService,
+    private readonly authService: AuthService,
+    private toast: ToastController,
     private readonly comicService: ComicsService,
     private alertController: AlertController
   ) {}
@@ -103,7 +106,6 @@ export class UsersComponent implements OnInit {
   }
 
   makeAtInit(): void {
-    console.log(this.user);
     this.userService.hasRoleToAdd().subscribe((bool) => {
       this.haveRoleToAddComic = bool;
     });
@@ -119,14 +121,13 @@ export class UsersComponent implements OnInit {
         })
       : null;
 
-      this.comicService.getIdComic(this.user.lastComicRead!).subscribe({
-        next: (comic) => {
-            this.lastComic = comic;
-            console.log(this.lastComic);
-        },
-        error: (err) => {
-            console.error(err);
-        },
+    this.comicService.getIdComic(this.user.lastComicRead!).subscribe({
+      next: (comic) => {
+        this.lastComic = comic;
+      },
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
 
@@ -251,17 +252,64 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  async deleteUser(userDelete:any){
-    if(userDelete.detail.role){
-      this.userService.deleteUser();
-    }else{
+  async alertDeleteUser() {
+    if(this.user._id?.toString() === this.userId || this.user.role=="admin"){
       const alert = await this.alertController.create({
-        header: '¡Cancelado!',
-        message: 'El usuario no se ha borrado.',
+        header: 'Borrar el usuario',
+        message: '¿Estas seguro que quieres borrar el usuario?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: async () => {
+              const alert = await this.alertController.create({
+                header: '¡Cancelado!',
+                message: 'El usuario no se ha borrado.',
+                buttons: ['Aceptar'],
+              });
+              await alert.present();
+            },
+          },
+          {
+            text: 'Borrar',
+            handler: () => {
+              this.userService.deleteUser().subscribe({
+                next: async () => {
+                  (
+                    await this.toast.create({
+                      duration: 3000,
+                      position: 'bottom',
+                      message: '¡Usuario borrado correctamente!',
+                    })
+                  ).present();
+                  this.authService.logout();
+                },
+                error: async (err) => {
+                  const alert = await this.alertController.create({
+                    header: '¡El usuario no se ha podido borrar!',
+                    message: err,
+                    buttons: ['Aceptar'],
+                  });
+                  await alert.present();
+                },
+              });
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    }
+    else{
+      const alert = await this.alertController.create({
+        header: 'No se puede borrar el usuario',
+        message: "El usuario que intentas borrar no es tu usuario o no tienes el rol requerido",
         buttons: ['Aceptar'],
       });
       await alert.present();
     }
+
   }
 
   goToAddComic(): void {

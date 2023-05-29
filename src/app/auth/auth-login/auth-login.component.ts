@@ -81,7 +81,7 @@ export class AuthLoginComponent implements OnInit, CanDeactivateComponent{
           await this.toast.create({
             duration: 3000,
             position: 'bottom',
-            message: 'User registered!',
+            message: '¡Inicio de sesión correctamente!',
           })
         ).present();
         this.nav.navigateRoot(['/']);
