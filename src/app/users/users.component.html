@@ -3,8 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="!user">Usuario:</ion-title>
-    <ion-title *ngIf="user">{{user.name}}</ion-title>
+    <ion-title>Perfil usuario:</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +12,7 @@
     <ion-avatar><ion-img src="{{user.avatar}}" alt="{{user.name}}"></ion-img>
     </ion-avatar>
     <ion-card-header>
+      <ion-card-title>@{{user.name}}</ion-card-title>
       <ion-card-subtitle>(Rol: {{user.role}})</ion-card-subtitle>
     </ion-card-header>
 
