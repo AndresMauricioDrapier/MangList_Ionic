@@ -7,7 +7,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { searchComic } from '../interfaces/responses';
 import { ComicsService } from '../services/comics.service';
 import { CommonModule } from '@angular/common';
@@ -42,7 +42,8 @@ export class ComicsPageComponent implements OnInit {
     private readonly comicsService: ComicsService,
     private readonly route: ActivatedRoute,
     private readonly fb: FormBuilder, // private readonly httpUser: UserService,
-    private readonly alertController: AlertController
+    private readonly alertController: AlertController,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +70,7 @@ export class ComicsPageComponent implements OnInit {
     });
   }
 
-  reloadProducts(refresher: IonRefresher) {
+  reloadComics(refresher: IonRefresher) {
     if (!this.userSearch) {
       this.comicsService.getComics().subscribe({
         next: (comics) => {
@@ -83,6 +84,19 @@ export class ComicsPageComponent implements OnInit {
             buttons: ['Ok'],
           });
         },
+      });
+    }
+  }
+
+  search(search: any) {
+    const toSearch = search.target.value;
+    if (!toSearch.startsWith('@')) {
+      this.router.navigate([''], {
+        queryParams: { search: toSearch },
+      });
+    } else {
+      this.router.navigate(['/users/all'], {
+        queryParams: { username: toSearch.slice(1) },
       });
     }
   }

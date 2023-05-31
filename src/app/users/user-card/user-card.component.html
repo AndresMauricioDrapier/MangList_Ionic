@@ -1,0 +1,8 @@
+<ion-card *ngIf="user" style="margin-left: auto; margin-right: auto;">
+  <ion-img [routerLink]="['/users',user._id]" alt="{{user.name}}"
+    src="{{user.avatar}}" />
+  <ion-card-header>
+    <ion-card-title>@{{user.name}}</ion-card-title>
+    <ion-card-subtitle>({{user.role}})</ion-card-subtitle>
+  </ion-card-header>
+</ion-card>

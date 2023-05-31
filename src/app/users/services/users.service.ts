@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Auth } from 'src/app/auth/interfaces/auth';
-import { AuthResponse } from 'src/app/auth/interfaces/responses';
+import { AuthResponse, AuthResponses } from 'src/app/auth/interfaces/responses';
 
 @Injectable({
   providedIn: 'root',
@@ -13,19 +13,19 @@ export class UsersService {
 
   userId = localStorage.getItem('user-id') || '';
 
-  // getUser(id: string): Observable<Auth> {
-  //     return this.http.get<AuthResponse>(`${this.USERS_URL}/${id}`).pipe(
-  //         map((r) => {
-  //             return r.result;
-  //         }),
-  //         catchError((resp: HttpErrorResponse) =>
-  //             throwError(
-  //                 () =>
-  //                     `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
-  //             )
-  //         )
-  //     );
-  // }
+  getUsers(): Observable<Auth[]> {
+    return this.http.get<AuthResponses>(this.USERS_URL).pipe(
+      map((r) => {
+        return r.result;
+      }),
+      catchError((resp: HttpErrorResponse) => {
+        return throwError(
+          () =>
+            `Error al obtener usuarios. Estado: ${resp.status}. Mensaje: ${resp.message}`
+        );
+      })
+    );
+  }
 
   getUser(id: string, me?: boolean): Observable<Auth> {
     if (me) {
@@ -119,8 +119,8 @@ export class UsersService {
   }
 
   deleteUser(): Observable<void> {
-    return this.http.delete<void>(this.USERS_URL + "/" + this.userId);
-}
+    return this.http.delete<void>(this.USERS_URL + '/' + this.userId);
+  }
 
   passwordRecovery(email: string): Observable<void> {
     return this.http.put<void>('users/password-recovery', {

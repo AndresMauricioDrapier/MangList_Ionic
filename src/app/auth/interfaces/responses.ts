@@ -5,7 +5,7 @@ export interface AuthResponse {
 }
 
 export interface AuthResponses {
-  users: Auth[];
+  result: Auth[];
 }
 
 export interface TokenResponse {

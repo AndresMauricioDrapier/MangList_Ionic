@@ -14,7 +14,7 @@
           <ion-img [src]="com.user.avatar"></ion-img>
         </ion-avatar>
         <ion-label text-wrap>
-          <p>{{ com.user.name }}</p>
+          <a [routerLink]="['/users',com.user._id]"><p>{{ com.user.name }}</p></a>
           <h4>{{ com.text }}</h4>
           <ml-star-rating [rating]="com.stars!" [edit]="false">
           </ml-star-rating>

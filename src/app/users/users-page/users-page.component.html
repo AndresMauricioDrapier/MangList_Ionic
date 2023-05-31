@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Comics:</ion-title>
+    <ion-title>Usuarios:</ion-title>
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar placeholder="Buscar comic o usuario ..." (keydown.enter)="search($event)" ></ion-searchbar>
@@ -12,31 +12,17 @@
 
 <ion-content #pageTop>
 
-  <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadComics(refresher)">
+  <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadUsers(refresher)">
     <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>
 
   <ion-card>
-    <ion-grid>
-
-      <ion-list>
-        <ion-item>
-          <ion-select aria-label="Genero" placeholder="Filtrar por genero:" (ionChange)="handleChange($event)">
-            <ng-container *ngFor="let g of genres">
-              <ion-select-option [value]="g">{{ g.name }}</ion-select-option>
-            </ng-container>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-
+    <ion-grid id="contenido">
+      <ml-user-card *ngFor="let user of users | usersFilter: toSearch" [user]="user"></ml-user-card>
     </ion-grid>
-
-    <ion-grid id="contenido" *ngFor="let comic of comics">
-      <ml-comic-card [comic]="comic.node"></ml-comic-card>
-    </ion-grid>
-
   </ion-card>
+
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">

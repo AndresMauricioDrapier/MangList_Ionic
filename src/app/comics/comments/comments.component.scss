@@ -1,21 +1,24 @@
-
-
-ion-card-title{
+ion-card-title {
   font-size: 1.5em;
   font-weight: bold;
 }
 
-.comentsTitle{
+.comentsTitle {
   background-color: #a309cd;
   border: 0;
 }
 
-.commentsContainer{
-  background-color: #23282E;
+.commentsContainer {
+  background-color: #23282e;
   color: white;
 }
 
-.commentDate{
+.commentDate {
   font-size: x-small;
   color: rgb(147, 147, 147);
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }

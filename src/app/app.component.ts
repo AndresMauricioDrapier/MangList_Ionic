@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
     { title: 'Contacto', url: '/contact', icon: 'mail' },
     { title: 'Sobre nosotros', url: '/about', icon: 'business' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     public environmentInjector: EnvironmentInjector,
