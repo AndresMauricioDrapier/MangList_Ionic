@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit {
   isMe!: boolean;
   haveRoleToAddComic!: boolean;
 
+
   newAvatar: string = '';
   isModalAvatarOpen = false;
 
@@ -40,6 +41,11 @@ export class UsersComponent implements OnInit {
   user: Auth = {
     email: '',
     avatar: '',
+  };
+  userWatching: Auth = {
+    email: '',
+    avatar: '',
+    role:"user"
   };
 
   public alertButtons = [
@@ -110,6 +116,7 @@ export class UsersComponent implements OnInit {
       this.haveRoleToAddComic = bool;
     });
     this.isMe = this.userId === this.user._id?.toString();
+    console.log(this.user);
 
     this.user.favorites != undefined
       ? this.user.favorites.forEach((idComic) => {
@@ -129,6 +136,10 @@ export class UsersComponent implements OnInit {
         console.error(err);
       },
     });
+
+    this.userService.getUser(this.userId).subscribe((user) => {
+      this.userWatching = user;
+  });
   }
 
   async saveUser(profile: any): Promise<void> {
@@ -310,6 +321,52 @@ export class UsersComponent implements OnInit {
       await alert.present();
     }
 
+  }
+
+  promoveToAdmin(): void {
+    this.userService.promoveToAdmin(this.user._id!).subscribe({
+      next: async () => {
+        (
+          await this.toast.create({
+            duration: 3000,
+            position: 'bottom',
+            message: '¡Usuario promovido a ADMINISTRADOR!',
+          })
+        ).present();
+        this.router.navigate(["/users", this.userId]);
+      },
+      error: async () => {
+        const alert = await this.alertController.create({
+          header: 'Usuario no se ha promovido correctamente',
+          message: "Error promoviendo el usuario",
+          buttons: ['Ok'],
+        });
+        await alert.present();
+      },
+    });
+  }
+
+  removeAdmin(): void {
+    this.userService.removeAdmin(this.user._id!).subscribe({
+      next: async () => {
+        (
+          await this.toast.create({
+            duration: 3000,
+            position: 'bottom',
+            message: '¡Se ha removido el rol del usuario a USER!',
+          })
+        ).present();
+        this.router.navigate(["/users", this.userId]);
+      },
+      error: async () => {
+        const alert = await this.alertController.create({
+          header: 'Rol del usuario no se ha removido correctamente',
+          message: "Error removiendo el rol del usuario",
+          buttons: ['Ok'],
+        });
+        await alert.present();
+      }
+    });
   }
 
   goToAddComic(): void {

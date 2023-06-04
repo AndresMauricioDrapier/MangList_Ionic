@@ -38,7 +38,7 @@
     </ion-item>
   </ion-card>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" color="principal" *ngIf="isMe">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" color="principal" *ngIf="isMe || userWatching.role === 'admin'">
     <ion-fab-button color="principal">
       <ion-icon name="chevron-up-outline"></ion-icon>
     </ion-fab-button>
@@ -58,9 +58,14 @@
       <ion-fab-button color="danger" (click)="alertDeleteUser()">
         <ion-icon name="trash"></ion-icon>
       </ion-fab-button>
+      <ion-fab-button *ngIf="userWatching.role === 'admin' && user.role !== 'admin'" color="warning" (click)="promoveToAdmin()">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="userWatching.role === 'admin' && user.role === 'admin'" color="principal" (click)="removeAdmin()">
+        <ion-icon name="person-remove-outline"></ion-icon>
+      </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-
 
   <ion-alert color="principal" trigger="presentAlertProfile" header="Introduce los nuevos datos:"
     [buttons]="alertButtons" [inputs]="alertProfileInputs" (didDismiss)="saveUser($event)"></ion-alert>

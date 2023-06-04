@@ -56,22 +56,6 @@ export class UsersService {
     }
   }
 
-  // getUserImage(imageName: string): Observable<string> {
-  //     return this.http
-  //         .get<string>(`${this.USERS_URL}/images/${imageName}`)
-  //         .pipe(
-  //             map((r) => {
-  //                 return r;
-  //             }),
-  //             catchError((resp: HttpErrorResponse) =>
-  //                 throwError(
-  //                     () =>
-  //                         `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
-  //                 )
-  //             )
-  //         );
-  // }
-
   saveProfile(name: string, email: string): Observable<void> {
     return this.http.put<void>(this.USERS_URL + '/user/' + this.userId, {
       name,
@@ -126,6 +110,14 @@ export class UsersService {
     return this.http.put<void>('users/password-recovery', {
       email: email,
     });
+  }
+
+  promoveToAdmin(idUser: number): Observable<void> {
+    return this.http.put<void>(this.USERS_URL + '/promote/' + idUser, {});
+  }
+
+  removeAdmin(idUser: number): Observable<void> {
+    return this.http.put<void>(this.USERS_URL + '/remove/' + idUser, {});
   }
 
   isLogged(): boolean {
