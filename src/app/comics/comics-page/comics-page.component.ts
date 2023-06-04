@@ -102,7 +102,7 @@ export class ComicsPageComponent implements OnInit {
   }
 
   handleChange(e: any) {
-    this.genreValue = e.detail.value;
+    this.genreValue = e.detail.value.value;
   }
 
   @ViewChild('pageTop') pageTop: any;

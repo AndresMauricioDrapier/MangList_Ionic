@@ -32,7 +32,7 @@
 
     </ion-grid>
 
-    <ion-grid id="contenido" *ngFor="let comic of comics">
+    <ion-grid id="contenido" *ngFor="let comic of comics | comicsFilter:genreValue ">
       <ml-comic-card [comic]="comic.node"></ml-comic-card>
     </ion-grid>
 
