@@ -7,7 +7,7 @@ import { Auth } from 'src/app/auth/interfaces/auth';
 })
 export class UsersFilterPipe implements PipeTransform {
   transform(users: Auth[], name: string): Auth[] {
-    if (name) {
+    if (name && users) {
       const filteredUserRankings: Auth[] = [];
 
       users.forEach((userRanking) => {
